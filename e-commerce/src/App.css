@@ -1,5 +1,9 @@
+:root {
+    --mainPadding: 50px
+}
+
 .App {
-width: 100vw;
+
 
 }
 

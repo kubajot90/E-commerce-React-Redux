@@ -1,0 +1,13 @@
+.headerTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 32px;
+    padding: 0 var(--mainPadding);
+    background-color: #000;
+}
+
+.headerTop__text {
+    color: white;
+}
