@@ -6,9 +6,10 @@ const HeaderMain =()=>{
 return(
     <div className={classes.headerMain}>
         <div className={classes.navigation}>
-            <span>Ona</span>
-            <span>On</span>
-            <span>Dziecko</span>
+            <span>Female</span>
+            <span>Male</span>
+            <span>Jewelery</span>
+            <span>Electronics</span>
         </div>
         <div className={classes.logo}>e·Shop.</div>
         <div className={classes.iconBox}>
