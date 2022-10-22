@@ -1,0 +1,11 @@
+.videoBox {
+    margin: 180px auto 0;
+    width: 91vw;
+    height: 460px;
+    overflow: hidden;
+}
+
+.headerVideo {
+    width: 100%;
+}
+

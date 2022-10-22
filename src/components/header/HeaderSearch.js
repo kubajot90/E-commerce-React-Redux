@@ -5,7 +5,10 @@ const HeaderSearch =()=> {
     return (
         <div className={classes.headerSearch}>
             <input className={classes.searchInput}/>
-        <BsSearch className={classes.headerSearchIcon}/>
+            <div>
+                <BsSearch className={classes.headerSearchIcon}/>
+            </div>
+        
         </div>
     )
 }
