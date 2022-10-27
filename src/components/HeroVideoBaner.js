@@ -8,6 +8,11 @@ const HeroVideoBaner =()=>{
       <video autoPlay loop muted className={classes.headerVideo}>
         <source src={video} type="video/mp4" />
       </video> 
+      <div className={classes.title}>
+        <p>E-SHOP DAYS</p>
+        <p>DISCOUNT -50%</p>
+        <button>check offer</button>
+      </div>
     </div>
     )
 }

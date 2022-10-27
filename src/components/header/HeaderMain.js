@@ -3,6 +3,7 @@ import { BsPerson, BsHandbag, BsSuitHeart } from 'react-icons/bs';
 import classes from './HeaderMain.module.css'
 
 const HeaderMain =()=>{
+
 return(
     <div className={classes.headerMain}>
         <div className={classes.navigation}>
