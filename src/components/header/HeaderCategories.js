@@ -1,36 +1,37 @@
 import HeaderSearch from './HeaderSearch';
 import CategoriesExpand from './CategoriesExpand';
 import classes from './HeaderCategories.module.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const HeaderCategories =()=>{
-    // const fetchCategories =()=> {
-    //     fetch('https://fakestoreapi.com/products')
-    //         .then(res=>res.json())
-    //         .then(json=>console.log(json))
-    // }
+    const [isExpand, setIsExpand] = useState(false);
+    const [chosenCategory, setChosenCategory] = useState('');
+   
+    const focusHandler =(category)=> {
+        setIsExpand(true);
+        setChosenCategory(category)
+    }
 
-    // useEffect(()=>{
-    //     fetchCategories()
-    // },[])
+    const blurHandler =()=> {
+        setIsExpand(false);
+    }
 
 return(
     <>
         <div className={classes.HeaderCategories}>
             <div className={classes.CategoriesBox}>
-                <span>Backpack</span>
-                <span>T-Shirt</span>
-                <span>Jacket</span>
-                <span>Bracelet</span>
-                <span>Micropave</span>
-                <span>Ring</span>
-                <span>Earrings</span>
-                <span>Raincoat</span>
-                <span>Shorts</span>
+                <span onMouseEnter={()=>focusHandler('Backpack')} onMouseLeave={blurHandler}>Backpack</span>
+                <span onMouseEnter={()=>focusHandler('Bracelet')} onMouseLeave={blurHandler}>Bracelet</span>
+                <span onMouseEnter={()=>focusHandler('Jacket')} onMouseLeave={blurHandler}>Jacket</span>
+                <span onMouseEnter={()=>focusHandler('Raincoat')} onMouseLeave={blurHandler}>Raincoat</span>
+                <span onMouseEnter={()=>focusHandler('Micropave')} onMouseLeave={blurHandler}>Micropave</span>
+                <span onMouseEnter={()=>focusHandler('T-Shirt')} onMouseLeave={blurHandler}>T-Shirt</span>
+                <span onMouseEnter={()=>focusHandler('Disk')} onMouseLeave={blurHandler}>Disk</span>
+               
             </div>
             <HeaderSearch/>
         </div>
-        <CategoriesExpand/>
+        {isExpand && <CategoriesExpand category={chosenCategory}/>}
     </>
 )
 }
