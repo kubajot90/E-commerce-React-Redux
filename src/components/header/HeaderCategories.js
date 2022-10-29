@@ -1,37 +1,36 @@
 import HeaderSearch from './HeaderSearch';
 import CategoriesExpand from './CategoriesExpand';
+import ButtonCategory from './ButtonCategory';
 import classes from './HeaderCategories.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const HeaderCategories =()=>{
     const [isExpand, setIsExpand] = useState(false);
     const [chosenCategory, setChosenCategory] = useState('');
    
-    const focusHandler =(category)=> {
-        setIsExpand(true);
+    const expandCategory =(state)=> {
+        setIsExpand(state)
+    }
+
+    const changeCategory =(category)=> {
         setChosenCategory(category)
     }
-
-    const blurHandler =()=> {
-        setIsExpand(false);
-    }
-
+   
 return(
     <>
         <div className={classes.HeaderCategories}>
             <div className={classes.CategoriesBox}>
-                <span onMouseEnter={()=>focusHandler('Backpack')} onMouseLeave={blurHandler}>Backpack</span>
-                <span onMouseEnter={()=>focusHandler('Bracelet')} onMouseLeave={blurHandler}>Bracelet</span>
-                <span onMouseEnter={()=>focusHandler('Jacket')} onMouseLeave={blurHandler}>Jacket</span>
-                <span onMouseEnter={()=>focusHandler('Raincoat')} onMouseLeave={blurHandler}>Raincoat</span>
-                <span onMouseEnter={()=>focusHandler('Micropave')} onMouseLeave={blurHandler}>Micropave</span>
-                <span onMouseEnter={()=>focusHandler('T-Shirt')} onMouseLeave={blurHandler}>T-Shirt</span>
-                <span onMouseEnter={()=>focusHandler('Disk')} onMouseLeave={blurHandler}>Disk</span>
-               
+                <ButtonCategory chosenCategory={chosenCategory} isExpand={isExpand} onChangeCategory={changeCategory} onExpandCategory={expandCategory} category={'Backpack'}/>
+                <ButtonCategory chosenCategory={chosenCategory} isExpand={isExpand} onChangeCategory={changeCategory} onExpandCategory={expandCategory} category={'Bracelet'}/>
+                <ButtonCategory chosenCategory={chosenCategory} isExpand={isExpand} onChangeCategory={changeCategory} onExpandCategory={expandCategory} category={'Jacket'}/>
+                <ButtonCategory chosenCategory={chosenCategory} isExpand={isExpand} onChangeCategory={changeCategory} onExpandCategory={expandCategory} category={'Raincoat'}/>
+                <ButtonCategory chosenCategory={chosenCategory} isExpand={isExpand} onChangeCategory={changeCategory} onExpandCategory={expandCategory} category={'Micropave'}/>
+                <ButtonCategory chosenCategory={chosenCategory} isExpand={isExpand} onChangeCategory={changeCategory} onExpandCategory={expandCategory} category={'T-Shirt'}/>
+                <ButtonCategory chosenCategory={chosenCategory} isExpand={isExpand} onChangeCategory={changeCategory} onExpandCategory={expandCategory} category={'Disk'}/>
             </div>
             <HeaderSearch/>
         </div>
-        {isExpand && <CategoriesExpand category={chosenCategory}/>}
+        {isExpand && <CategoriesExpand onMouseHandler={expandCategory} category={chosenCategory}/>}
     </>
 )
 }

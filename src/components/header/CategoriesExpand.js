@@ -6,16 +6,11 @@ import classes from './CategoriesExpand.module.css';
 const CategoriesExpand =(props)=>{
     const dataFetch = useSelector(state => state.products.data);
 
-    const toggleHandler = ()=>{
-        console.log(dataFetch);
-    }
-
     useEffect(()=>{
         console.log(dataFetch);
     },[dataFetch])
 
     const createExpandList =(category)=> {
-        
         const product = dataFetch.filter((item)=> 
             item.title.includes(category));
         console.log('datafetch', dataFetch);
@@ -36,15 +31,18 @@ const CategoriesExpand =(props)=>{
 
         return (
             <ul>
-                <li><b>{mainProduct.title}</b></li>
+                <h4>{mainProduct.title}</h4>
                 <br/>
-                {currentCategoryItems.map((product)=><li key={product.id}>{product.title}</li>)}
-                <br/>
+                {currentCategoryItems.map((product)=><li key={product.id} className={classes.items}>{product.title}</li>)}
 
-                { otherCategoryNames.map((category)=>{ return <> <br/> {dataFetch.filter((item)=>item.category === category).map((item)=>
-                    <li key={item.id}>{item.title}</li>)}
-                    </>
-                }
+                { otherCategoryNames.map((category)=> 
+                <div key={category}> 
+                    <br/> 
+                    <h4>{category}</h4>
+                    {dataFetch.filter((item)=>item.category === category)
+                    .map((item)=>
+                        <li key={item.id} className={classes.items}>{item.title}</li>)}
+                </div>
                 ) }
             </ul>
         )
@@ -52,7 +50,7 @@ const CategoriesExpand =(props)=>{
     }
 
     return(
-        <div className={classes.categoriesExpand}>
+        <div onMouseEnter={()=>props.onMouseHandler(true)} onMouseLeave={()=>props.onMouseHandler(false)} className={classes.categoriesExpand}>
             { props.category && dataFetch && createExpandList(props.category)}
         </div>
     )

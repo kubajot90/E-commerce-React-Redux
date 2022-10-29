@@ -1,0 +1,14 @@
+.buttonCategory {
+    all: unset;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 42px;
+    padding: 0 8px;
+    font-size: .8rem;
+    transition: background-color .2s;
+}
+
+.buttonCategoryHover {
+    background-color: white;
+    border-bottom: 2px solid black;
+}
