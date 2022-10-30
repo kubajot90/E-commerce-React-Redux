@@ -41,7 +41,7 @@
 
 @keyframes clickFlash {
     0%{ 
-        color: white;
+        color:  rgb(239, 239, 239);
     }
   
     100%{ 
