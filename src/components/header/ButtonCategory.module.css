@@ -5,10 +5,21 @@
     line-height: 42px;
     padding: 0 8px;
     font-size: .8rem;
-    transition: background-color .2s;
+    transition: background-color .2s ;
 }
 
 .buttonCategoryHover {
     background-color: white;
     border-bottom: 2px solid black;
+    animation: clickFlash .07s none  ;
+    
+}
+@keyframes clickFlash {
+    from{ 
+       color:black; 
+    }
+  
+    to{ 
+      color: rgb(255, 255, 255); 
+    }
 }
