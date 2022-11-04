@@ -1,4 +1,3 @@
-import HeaderSearch from './HeaderSearch';
 import CategoriesExpand from './CategoriesExpand';
 import ButtonCategory from './ButtonCategory';
 import classes from './HeaderCategories.module.css';
@@ -28,7 +27,6 @@ return(
                 <ButtonCategory chosenCategory={chosenCategory} isExpand={isExpand} onChangeCategory={changeCategory} onExpandCategory={expandCategory} category={'T-Shirt'}/>
                 <ButtonCategory chosenCategory={chosenCategory} isExpand={isExpand} onChangeCategory={changeCategory} onExpandCategory={expandCategory} category={'Disk'}/>
             </div>
-            <HeaderSearch/>
         </div>
         {isExpand && <CategoriesExpand onMouseHandler={expandCategory} category={chosenCategory}/>}
     </>

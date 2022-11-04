@@ -1,6 +1,8 @@
 .headerSearch {
     display: flex;
-    position: relative;
+    position: absolute;
+    top: 92px;
+    right: var(--mainPadding);
     align-items: center;
     justify-content: flex-end;
     height: 34px;
@@ -14,13 +16,15 @@
 
 .searchInput {
     all: unset;
+    width: 100%;
+    z-index: 99;
 }
 
 .typing {
     position: absolute;
     top: 50%;
-    left: 5%;
+    left: 0;
     transform: translateY(-50%);
-    color: rgb(108, 108, 108);
+    color: rgb(158, 158, 158);
     font-size: .7rem;
 }

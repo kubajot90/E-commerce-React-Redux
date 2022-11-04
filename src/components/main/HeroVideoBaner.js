@@ -1,5 +1,5 @@
 import classes from './HeroVideoBaner.module.css';
-import video from "../assets/bgVideo1.mp4";
+import video from "../../assets/bgVideo1.mp4";
 
 
 const HeroVideoBaner =()=>{

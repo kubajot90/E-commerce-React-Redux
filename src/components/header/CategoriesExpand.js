@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 // import { counterActions, visibleActions } from '../../store/store';
 import classes from './CategoriesExpand.module.css';
 
@@ -7,9 +7,9 @@ const CategoriesExpand =(props)=>{
     const dataFetch = useSelector(state => state.products.data);
     const [changeCategory, setChangeCategory] = useState(false)
 
-    useEffect(()=>{
-        console.log(dataFetch);
-    },[dataFetch])
+    // useEffect(()=>{
+    //     console.log(dataFetch);
+    // },[dataFetch])
 
     useEffect(()=>{
         setChangeCategory(true);
@@ -22,7 +22,6 @@ const CategoriesExpand =(props)=>{
     const createExpandList =(category)=> {
         const product = dataFetch.filter((item)=> 
             item.title.includes(category));
-        console.log('datafetch', dataFetch);
 
         const mainProduct = {
             itemId: product[0].id,

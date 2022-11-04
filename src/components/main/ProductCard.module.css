@@ -1,0 +1,32 @@
+.productCard {
+flex-basis: 20%;
+/* min-width: 30%; */
+flex-shrink:0;
+/* width: auto; */
+margin-right: 30px;
+height: 400px;
+}
+
+.productImage {
+    width: auto;
+    height: 100%;
+    background-position:center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.productDescription {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    z-index: 99;
+}
+
+.productTitle {
+
+}
+
+.productPrice {
+
+}
