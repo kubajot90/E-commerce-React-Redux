@@ -1,7 +1,7 @@
 .headerSearch {
     display: flex;
     position: absolute;
-    top: 92px;
+    top: 60px;
     right: var(--mainPadding);
     align-items: center;
     justify-content: flex-end;

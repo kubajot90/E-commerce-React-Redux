@@ -1,6 +1,6 @@
 import Header from './components/header/Header';
 import HeroVideoBaner from './components/main/HeroVideoBaner';
-import Products from './components/main/Products';
+import ProductsSlider from './components/main/ProductsSlider';
 import './App.css';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -21,7 +21,7 @@ function App() {
     <>
       <Header/>
       <HeroVideoBaner/>
-      {fetchProducts && <Products category={"women's clothing"}/>}
+      {fetchProducts && <ProductsSlider category={"women's clothing"}/>}
     </>
   );
 }

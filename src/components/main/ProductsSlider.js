@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import ProductCard from './ProductCard';
-import classes from './Products.module.css';
+import classes from './ProductsSlider.module.css';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
 
 const Products =(props)=> {

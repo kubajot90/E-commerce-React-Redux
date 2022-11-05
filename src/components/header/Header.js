@@ -6,12 +6,14 @@ import classes from './Header.module.css';
 
 const Header =()=>{
 return(
-    <div className={classes.header}>
+    <>
         <HeaderTop/>
+    <div className={classes.header}>
         <HeaderMain/>
         <HeaderCategories/>
         <HeaderSearch/>
     </div>
+    </>
 )
 }
 export default Header

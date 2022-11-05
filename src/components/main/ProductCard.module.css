@@ -1,15 +1,18 @@
 .productCard {
 flex-basis: 20%;
-/* min-width: 30%; */
 flex-shrink:0;
-/* width: auto; */
+position: relative;
 margin-right: 30px;
+margin-bottom: 40px;
 height: 400px;
+cursor: pointer;
+background-color: #fff;
+overflow: hidden;
 }
 
 .productImage {
     width: auto;
-    height: 100%;
+    height: 86%;
     background-position:center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -17,10 +20,17 @@ height: 400px;
 
 .productDescription {
     position: absolute;
+    padding: 10px 0;
+    bottom: -35px;
+    left: 0;
     width: 100%;
-    height: auto;
-    background-color: #fff;
-    z-index: 99;
+    min-height: 90px;
+    background-color: rgb(255, 255, 255);
+    transition: .3s;
+}
+
+.productCard:hover .productDescription{
+  bottom: 0;
 }
 
 .productTitle {
@@ -28,5 +38,7 @@ height: 400px;
 }
 
 .productPrice {
-
+    padding: 3px;
+    font-size: .8rem;
+    font-weight: 300;
 }

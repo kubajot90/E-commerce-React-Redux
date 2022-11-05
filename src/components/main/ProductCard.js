@@ -34,7 +34,7 @@ return (
         <div style={{backgroundImage :`url(${props.product.image})`}} className={classes.productImage} alt='product'></div>
     <div className={classes.productDescription}>
         <p className={classes.productTitle}>{props.product.title}</p>
-        <p className={classes.productPrice}>{props.product.price}</p>
+        <p className={classes.productPrice}>{`${props.product.price}zł`}</p>
     </div>
 </div>
 )
