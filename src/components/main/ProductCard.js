@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import classes from './ProductCard.module.css';
+import { AiFillStar } from 'react-icons/ai';
 
 const ProductCard =(props)=> {
     const productRef = useRef();
@@ -35,6 +36,10 @@ return (
     <div className={classes.productDescription}>
         <p className={classes.productTitle}>{props.product.title}</p>
         <p className={classes.productPrice}>{`${props.product.price}zł`}</p>
+        <p className={classes.productRating}>
+            <AiFillStar className={classes.starIcon}/>
+            {`Rating: ${props.product.rating.rate}`}
+            </p>
     </div>
 </div>
 )

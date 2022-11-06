@@ -34,11 +34,32 @@ overflow: hidden;
 }
 
 .productTitle {
-
+    overflow: hidden;
 }
 
 .productPrice {
     padding: 3px;
     font-size: .8rem;
-    font-weight: 300;
+    font-weight: 500;
+}
+
+.productRating {
+display: flex;
+align-items: center;
+justify-content: flex-end;
+font-size: .7rem;
+margin-top: 10px;
+padding-right: 20px;
+}
+
+.starIcon {
+    color: rgb(255, 166, 0);
+    margin-right: 5px;
+}
+
+@media(max-width: 1024px){
+    .productTitle {
+        white-space:nowrap;
+        text-overflow:ellipsis
+    }
 }
