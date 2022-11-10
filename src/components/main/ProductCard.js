@@ -30,8 +30,12 @@ const ProductCard =(props)=> {
                requestRef.current = requestAnimationFrame(checkPosition); 
           }
 
+          const setPath =()=> {
+            console.log('dziala');
+          }
+
 return (
-<div className={classes.productCard} ref={productRef} >
+<div className={classes.productCard} ref={productRef} onClick={setPath} >
         <div style={{backgroundImage :`url(${props.product.image})`}} className={classes.productImage} alt='product'></div>
     <div className={classes.productDescription}>
         <p className={classes.productTitle}>{props.product.title}</p>

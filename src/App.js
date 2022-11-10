@@ -1,27 +1,20 @@
 import Header from './components/header/Header';
-import HeroVideoBaner from './components/main/HeroVideoBaner';
-import ProductsSlider from './components/main/ProductsSlider';
+import Product from './components/product/Product';
+import Main from './components/main/Main';
+import {Route, Routes} from 'react-router-dom';
 import './App.css';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import fetchProductsData from './store/productsSlice'
 
 
 
 function App() {
-  const fetchProducts = useSelector(state => state.products.data);
-  const dispatch = useDispatch();
-
-  useEffect(()=>{
-    dispatch(fetchProductsData())
-  },[])
 
   return (
     <>
       <Header/>
-      <HeroVideoBaner/>
-      {fetchProducts && <ProductsSlider category={"women's clothing"}/>}
+        <Routes>
+          <Route path='/' element={<Main/>} />
+          <Route path='/product/:productId' element={<Product/>} />
+        </Routes>
     </>
   );
 }
