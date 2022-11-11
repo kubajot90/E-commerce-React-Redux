@@ -5,6 +5,7 @@
     padding: 0 var(--mainPadding);
     width: 100%;
     height: 57px;
+    cursor: pointer;
 }
 
 .navigation{

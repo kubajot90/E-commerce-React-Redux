@@ -1,0 +1,32 @@
+.product {
+margin-top: 35px;
+padding: 0 var(--mainPadding);
+}
+
+.breadCrumbs__list {
+    display: flex;
+    font-size: .7rem;
+    list-style-type: none;
+    color: rgba(0, 0, 0, 0.6);
+    
+}
+
+.breadCrumbs__item {
+    
+}
+
+.breadCrumbs__link {
+    all: unset;
+}
+
+.breadCrumbs__arrow {
+    margin: 0 10px;
+}
+
+.breadCrumbs__span {
+   
+}
+
+.breadCrumbs__span.active {
+    color: rgba(0, 0, 0);
+}

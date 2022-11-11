@@ -1,10 +1,15 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 import classes from './ProductCard.module.css';
 import { AiFillStar } from 'react-icons/ai';
 
 const ProductCard =(props)=> {
+    const navigate = useNavigate();
     const productRef = useRef();
     const requestRef = useRef();
+
+    const category = props.product.category.replace(/\s/g,'_');
+    const title = props.product.title.replace(/\s/g,'_');
 
         useEffect(()=>{
             const lastProductIndex = props.productsLength -1;
@@ -31,12 +36,12 @@ const ProductCard =(props)=> {
           }
 
           const setPath =()=> {
-            console.log('dziala');
+            navigate(`/${category}/${title}`, {state: props.product})
           }
 
 return (
-<div className={classes.productCard} ref={productRef} onClick={setPath} >
-        <div style={{backgroundImage :`url(${props.product.image})`}} className={classes.productImage} alt='product'></div>
+<div onClick={setPath} className={classes.productCard} ref={productRef}>
+    <div style={{backgroundImage :`url(${props.product.image})`}} className={classes.productImage} alt='product'></div>
     <div className={classes.productDescription}>
         <p className={classes.productTitle}>{props.product.title}</p>
         <p className={classes.productPrice}>{`${props.product.price}zł`}</p>
