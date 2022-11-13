@@ -7,7 +7,7 @@ padding: 0 var(--mainPadding);
     display: flex;
     font-size: .7rem;
     list-style-type: none;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.5);
     
 }
 
@@ -24,7 +24,13 @@ padding: 0 var(--mainPadding);
 }
 
 .breadCrumbs__span {
-   
+   cursor: pointer;
+   transition: .2s;
+}
+
+.breadCrumbs__span:hover {
+    color: rgba(0, 0, 0);
+    text-decoration: underline;
 }
 
 .breadCrumbs__span.active {

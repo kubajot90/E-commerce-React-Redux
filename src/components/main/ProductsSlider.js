@@ -13,14 +13,16 @@ const Products =(props)=> {
     const [transformDistance, setTransformDistance] = useState(0)
     const fetchProducts = useSelector(state => state.products.data);
 
+    const category = props.category.replace(/\s/g,'_');
+
     const firstProductDistance =()=> {
        return productsRef.current.getBoundingClientRect().left
     }
-
+//////////////////
     useEffect(()=>{
         console.log(fetchProducts);
     },[fetchProducts])
-
+///////////////////
     const moveProducts =(distance)=> {
         setTransformDistance(prev=> prev + distance)
         requestRef.current = requestAnimationFrame(()=>moveProducts(distance));
@@ -70,7 +72,7 @@ const Products =(props)=> {
     
 
 return (
-    <div className={classes.productsBox}>
+    <div className={classes.productsBox} id={category}>
         <div className={classes.products} style={{transform: `translateX(${transformDistance}px)`}} ref={productsRef}>
 
        { filteredProducts.map((product,index)=> <ProductCard product={product} key={product.id} transformDistance={transformDistance} index={index} productsLength={filteredProducts.length} onTransformDistance={setDistance} isMove={isMove} onFirstProductDistance={firstProductDistance} onCancelAnimation={cancelAnimation} onCanSlideHandler={canSlideHandler}/>) }

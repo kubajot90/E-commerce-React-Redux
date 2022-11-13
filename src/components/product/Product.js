@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import classes from './Product.module.css';
 
 const Product =()=> {
+    const navigate = useNavigate();
     const location = useLocation();
 
-    const {image, title, price, description, category} = location.state;
+    const {image, title, price, description} = location.state;
+    const category = location.state.category.replace(/\s/g,'_');
 
     return(
         <div className={classes.product}>
@@ -19,11 +22,11 @@ const Product =()=> {
                         <span className={classes.breadCrumbs__arrow}>{`>`}</span>
                 </li>
                 <li>
-                    <Link to={`/${category}`} className={classes.breadCrumbs__link}>
+                    <HashLink to={`/#${category}`} className={classes.breadCrumbs__link}>
                         <span className={classes.breadCrumbs__span} >
-                            {`${category}`}
+                            {location.state.category}
                         </span>
-                    </Link>
+                    </HashLink>
                         <span className={classes.breadCrumbs__arrow}>{`>`}</span>
                 </li>
                 <li>

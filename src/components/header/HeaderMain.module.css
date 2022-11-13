@@ -37,3 +37,8 @@
     font-size: 1.6rem;
     margin-left: 35px;
 }
+
+.activeLink {
+    color: black;
+    text-decoration: underline;
+}

@@ -1,5 +1,6 @@
 import { BsPerson, BsHandbag, BsSuitHeart } from 'react-icons/bs';
 import { useNavigate } from "react-router-dom";
+import { NavHashLink } from 'react-router-hash-link';
 
 import classes from './HeaderMain.module.css'
 
@@ -13,10 +14,10 @@ const HeaderMain =()=>{
 return(
     <div className={classes.headerMain}>
         <div className={classes.navigation}>
-            <span>Female</span>
-            <span>Male</span>
-            <span>Jewelery</span>
-            <span>Electronics</span>
+            <NavHashLink>Female</NavHashLink>
+            <NavHashLink>Male</NavHashLink>
+            <NavHashLink>Jewelery</NavHashLink>
+            <NavHashLink>Electronics</NavHashLink>
         </div>
         <div className={classes.logo} onClick={moveHome}>e·Shop.</div>
         <div className={classes.iconBox}>
