@@ -12,11 +12,24 @@
     flex-basis: 33%;
     font-size: 1.1rem;
     font-weight: 600;
-    color: rgb(81, 81, 81);
 }
 
-.navigation span {
-   margin-right: 20px;
+.navigation__Link {
+    text-decoration: none;
+    margin-right: 20px;
+    color: rgb(100, 100, 100);
+    transition: .2s;
+}
+
+.navigation__Link:hover {
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+}
+
+.navigation__LinkActive {
+    color: black;
+    padding-bottom: 8px;
+    border-bottom: 2px solid black;
 }
 
 .logo {
@@ -38,7 +51,4 @@
     margin-left: 35px;
 }
 
-.activeLink {
-    color: black;
-    text-decoration: underline;
-}
+
