@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import ProductCard from './ProductCard';
 import classes from './ProductsSlider.module.css';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
@@ -10,8 +11,10 @@ const Products =(props)=> {
     const productsRef = useRef();
     const requestRef = useRef();
     const canSlide = useRef(true);
+    const productRef = useRef();
     const [transformDistance, setTransformDistance] = useState(0)
     const fetchProducts = useSelector(state => state.products.data);
+    const navigate = useNavigate()
 
     const category = props.category.replace(/\s/g,'_');
 
@@ -23,6 +26,20 @@ const Products =(props)=> {
         console.log(fetchProducts);
     },[fetchProducts])
 ///////////////////
+
+useEffect(() => {
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+           console.log('entry.isIntersecting', entry.isIntersecting);
+           navigate(`/#${category}`);
+        }
+    );
+    productRef.current && observer.observe(productRef.current);
+
+    return () => observer.unobserve(productRef.current);
+}, []);
+
+
     const moveProducts =(distance)=> {
         setTransformDistance(prev=> prev + distance)
         requestRef.current = requestAnimationFrame(()=>moveProducts(distance));
@@ -72,7 +89,7 @@ const Products =(props)=> {
     
 
 return (
-    <div className={classes.productsBox} id={category}>
+    <div ref={productRef} className={classes.productsBox} id={category}>
         <div className={classes.products} style={{transform: `translateX(${transformDistance}px)`}} ref={productsRef}>
 
        { filteredProducts.map((product,index)=> <ProductCard product={product} key={product.id} transformDistance={transformDistance} index={index} productsLength={filteredProducts.length} onTransformDistance={setDistance} isMove={isMove} onFirstProductDistance={firstProductDistance} onCancelAnimation={cancelAnimation} onCanSlideHandler={canSlideHandler}/>) }

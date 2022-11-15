@@ -1,9 +1,7 @@
 import CategoriesExpand from './CategoriesExpand';
 import ButtonCategory from './ButtonCategory';
 import classes from './HeaderCategories.module.css';
-import { useEffect, useState } from 'react';
-
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const HeaderCategories =()=>{
     const [isExpand, setIsExpand] = useState(false);
