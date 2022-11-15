@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HashLink } from 'react-router-hash-link';
+import { useDispatch } from "react-redux";
+import { categoryActions } from '../../store/categorySlice';
+import { useSelector } from 'react-redux';
 
 import { BsPerson, BsHandbag, BsSuitHeart } from 'react-icons/bs';
 import classes from './HeaderMain.module.css'
 
 const HeaderMain =()=> {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [isActive, setIsActive] = useState(null)
+    const activeCategoryIndex = useSelector(state => state.category.activeIndex);
 
     const categories = [
         {
@@ -26,12 +30,8 @@ const HeaderMain =()=> {
         ];
 
     const toggleActiveClass =(index)=> {
-        setIsActive(index)
+        dispatch(categoryActions.toggleActive(index))
     }
-
-useEffect(()=>{
-console.log('isActive', isActive);
-},[isActive])
 
     const moveHome =()=> {
         navigate('/')
@@ -42,7 +42,7 @@ return(
         <div className={classes.navigation}>
             {categories.map((element, index) => 
                 <HashLink to={`${element.categoryHash}`} 
-                onClick={()=>toggleActiveClass(index)} scroll={(el) => el.scrollIntoView({ behavior: 'smooth'})} className={`${classes.navigation__Link} ${isActive === index ? classes.navigation__LinkActive : ''}`} key={element.categoryHash}>
+                onClick={()=>toggleActiveClass(index)} scroll={(el) => el.scrollIntoView({ behavior: 'smooth'})} className={`${classes.navigation__Link} ${activeCategoryIndex === index ? classes.navigation__LinkActive : ''}`} key={element.categoryHash}>
                     {`${element.categoryTitle}`}
                 </HashLink> )}
         </div>
