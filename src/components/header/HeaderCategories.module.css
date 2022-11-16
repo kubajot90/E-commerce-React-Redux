@@ -2,7 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative;
+    /* position: relative; */
+    position: sticky;
     width: 100%;
     min-height: 42px;
     height: auto;

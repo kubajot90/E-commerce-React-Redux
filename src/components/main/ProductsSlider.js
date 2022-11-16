@@ -34,17 +34,11 @@ useEffect(() => {
 
     const observer = new IntersectionObserver(
         ([entry]) => {
-            console.log('entry.isIntersecting', entry.isIntersecting);
-            console.log(`#${category}`);
             if(entry.isIntersecting){
                 navigate(`/#${category}`);
                 dispatch(categoryActions.toggleActiveHash(`#${category}`));
-            }else{
-                // console.log('dispatch null');
-                // dispatch(categoryActions.toggleActiveHash(null))
             }
         }, 
-        // { rootMargin: '-100px 0px 100px 0px'} 
     );
     ref && observer.observe(ref);
 

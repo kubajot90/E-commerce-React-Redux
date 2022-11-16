@@ -16,7 +16,6 @@ const HeroVideoBaner =()=>{
 
     const observer = new IntersectionObserver(
         ([entry]) => {
-            console.log('herobaner in view', entry.isIntersecting);
             if(entry.isIntersecting){
                 navigate(`/`);
                 dispatch(categoryActions.toggleActiveHash(null));
