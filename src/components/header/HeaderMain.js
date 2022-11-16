@@ -11,7 +11,7 @@ import classes from './HeaderMain.module.css'
 const HeaderMain =()=> {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const activeCategoryIndex = useSelector(state => state.category.activeIndex);
+    const activeCategoryHash = useSelector(state => state.category.activeHash);
 
     const categories = [
         {
@@ -30,7 +30,7 @@ const HeaderMain =()=> {
         ];
 
     const toggleActiveClass =(index)=> {
-        dispatch(categoryActions.toggleActive(index))
+        dispatch(categoryActions.toggleActiveHash(categories[index].categoryHash))
     }
 
     const moveHome =()=> {
@@ -41,8 +41,11 @@ return(
     <div className={classes.headerMain}>
         <div className={classes.navigation}>
             {categories.map((element, index) => 
-                <HashLink to={`${element.categoryHash}`} 
-                onClick={()=>toggleActiveClass(index)} scroll={(el) => el.scrollIntoView({ behavior: 'smooth'})} className={`${classes.navigation__Link} ${activeCategoryIndex === index ? classes.navigation__LinkActive : ''}`} key={element.categoryHash}>
+                <HashLink to={`/${element.categoryHash}`} 
+                onClick={()=>toggleActiveClass(index)} 
+                scroll={(el) => el.scrollIntoView({ behavior: 'smooth'})} 
+                className={`${classes.navigation__Link} ${activeCategoryHash === categories[index].categoryHash ? classes.navigation__LinkActive : ''}`} 
+                key={element.categoryHash}>
                     {`${element.categoryTitle}`}
                 </HashLink> )}
         </div>

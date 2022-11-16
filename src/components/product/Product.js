@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import classes from './Product.module.css';
 
 const Product =()=> {
-    const navigate = useNavigate();
     const location = useLocation();
 
     const {image, title, price, description} = location.state;

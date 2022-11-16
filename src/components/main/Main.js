@@ -18,6 +18,8 @@ import fetchProductsData from '../../store/productsSlice'
         <>
             <HeroVideoBaner/>
             {fetchProducts && <ProductsSlider category={"women's clothing"}/>}
+            {fetchProducts && <ProductsSlider category={"men's clothing"}/>}
+            {fetchProducts && <ProductsSlider category={"jewelery"}/>}
         </>
     )
  }

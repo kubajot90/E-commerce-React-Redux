@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const categorySlice = createSlice({
     name: 'category',
-    initialState: { activeIndex: null },
+    initialState: { activeHash: null },
     reducers: {
-        toggleActive(state, action){
-            state.activeIndex = action.payload;
+        toggleActiveHash(state, action){
+            state.activeHash = action.payload;
         }
     }
 })

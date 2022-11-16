@@ -1,6 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { categoryActions } from '../../store/categorySlice';
 import ProductCard from './ProductCard';
 import classes from './ProductsSlider.module.css';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
@@ -15,6 +16,7 @@ const Products =(props)=> {
     const [transformDistance, setTransformDistance] = useState(0)
     const fetchProducts = useSelector(state => state.products.data);
     const navigate = useNavigate()
+    const dispatch = useDispatch();
 
     const category = props.category.replace(/\s/g,'_');
 
@@ -28,15 +30,25 @@ const Products =(props)=> {
 ///////////////////
 
 useEffect(() => {
+    const ref = productRef.current;
+
     const observer = new IntersectionObserver(
         ([entry]) => {
-           console.log('entry.isIntersecting', entry.isIntersecting);
-           navigate(`/#${category}`);
-        }
+            console.log('entry.isIntersecting', entry.isIntersecting);
+            console.log(`#${category}`);
+            if(entry.isIntersecting){
+                navigate(`/#${category}`);
+                dispatch(categoryActions.toggleActiveHash(`#${category}`));
+            }else{
+                // console.log('dispatch null');
+                // dispatch(categoryActions.toggleActiveHash(null))
+            }
+        }, 
+        // { rootMargin: '-100px 0px 100px 0px'} 
     );
-    productRef.current && observer.observe(productRef.current);
+    ref && observer.observe(ref);
 
-    return () => observer.unobserve(productRef.current);
+    return () => observer.unobserve(ref);
 }, []);
 
 
