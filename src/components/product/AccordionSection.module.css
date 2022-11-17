@@ -1,0 +1,25 @@
+.accordion__section {
+    border-bottom: 2px solid grey;
+    transition: .2s;
+}
+
+.accordion__titleBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.accordion__title {
+    font-size: .8rem;
+}
+
+.accordion__titleIcon {
+    font-size: 1.4rem;
+}
+
+.accordion__text {
+    font-size: .75rem;
+    line-height: 1.4rem;
+    margin-bottom: 20px;
+}

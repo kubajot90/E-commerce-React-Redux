@@ -10,13 +10,21 @@ import { AiOutlineFieldTime } from 'react-icons/ai';
 const Product =()=> {
     const location = useLocation();
 
-    const {image, title, price, description} = location.state;
-    const category = location.state.category.replace(/\s/g,'_');
+    const {image, title, price, description, category} = location.state;
+    const categoryUrl = category.replace(/\s/g,'_');
     const discount = Math.floor(Math.random() * 45)
         
     const discountPrice =()=> {
        return (price * ( discount/100 )).toFixed(2)
     }
+
+    const isClothes = category === "women's clothing" ||
+    category === "men's clothing"
+
+    const planetFriendly = isClothes &&
+        <div className={classes.product__eco}>
+            Planet Friendly
+        </div>
 
     return(
         <div className={classes.product}>
@@ -30,9 +38,9 @@ const Product =()=> {
                         <span className={classes.breadCrumbs__arrow}>{`>`}</span>
                 </li>
                 <li>
-                    <HashLink to={`/#${category}`} className={classes.breadCrumbs__link}>
+                    <HashLink to={`/#${categoryUrl}`} className={classes.breadCrumbs__link}>
                         <span className={classes.breadCrumbs__span} >
-                            {location.state.category}
+                            {category}
                         </span>
                     </HashLink>
                         <span className={classes.breadCrumbs__arrow}>{`>`}</span>
@@ -63,20 +71,20 @@ const Product =()=> {
                     </div>
                         <div className={classes.product__discountBox}>
                             <div className={classes.product__discount}>{`-${discount}%`}</div>
-                            <div className={classes.product__eco}>Planet Friendly</div>
+                            { isClothes && <div className={classes.product__eco}>Planet Friendly</div> }
                         </div>
                         <div className={classes.product__priceBox}>
                             <div className={classes.product__priceSales}>{`${discountPrice()} PLN`}</div>
                             <div className={classes.product__price}>{`${price} PLN`}</div>
                         </div>
-                        <select className={classes.product__select}>
+                        { isClothes && <select className={classes.product__select}>
                             <option value="">Please choose your size</option>
                             <option value="S">S</option>
                             <option value="M">M</option>
                             <option value="L">L</option>
                             <option value="XL">XL</option>
                             <option value="XXL">XXL</option>
-                        </select>
+                        </select> }
                         <div className={classes.product__buttons}>
                             <button className={classes.product__buttonAdd}>
                                 Add to cart
@@ -99,7 +107,7 @@ const Product =()=> {
                                 <BsSuitClub className={classes.product__informationIcon}/>
                                 <span>Save with E-shop Club</span>  
                             </div>
-                            <Accordion/>  
+                            <Accordion description={description}/>  
                         </div>
                 </div>
             </div>
