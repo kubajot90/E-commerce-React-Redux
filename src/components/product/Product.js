@@ -12,6 +12,11 @@ const Product =()=> {
 
     const {image, title, price, description} = location.state;
     const category = location.state.category.replace(/\s/g,'_');
+    const discount = Math.floor(Math.random() * 45)
+        
+    const discountPrice =()=> {
+       return (price * ( discount/100 )).toFixed(2)
+    }
 
     return(
         <div className={classes.product}>
@@ -57,12 +62,12 @@ const Product =()=> {
                         </div>
                     </div>
                         <div className={classes.product__discountBox}>
-                            <div className={classes.product__discount}>-41%</div>
+                            <div className={classes.product__discount}>{`-${discount}%`}</div>
                             <div className={classes.product__eco}>Planet Friendly</div>
                         </div>
                         <div className={classes.product__priceBox}>
-                            <div className={classes.product__priceSales}>499.99 PLN</div>
-                            <div className={classes.product__price}>{price} PLN</div>
+                            <div className={classes.product__priceSales}>{`${discountPrice()} PLN`}</div>
+                            <div className={classes.product__price}>{`${price} PLN`}</div>
                         </div>
                         <select className={classes.product__select}>
                             <option value="">Please choose your size</option>
