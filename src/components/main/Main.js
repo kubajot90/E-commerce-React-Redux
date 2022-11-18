@@ -4,6 +4,7 @@ import HeroVideoBaner from './HeroVideoBaner';
 import ProductsSlider from './ProductsSlider';
 import fetchProductsData from '../../store/productsSlice'
 
+
  const Main =()=> {
     const fetchProducts = useSelector(state => state.products.data);
     const dispatch = useDispatch();

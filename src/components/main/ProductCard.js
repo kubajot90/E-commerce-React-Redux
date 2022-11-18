@@ -37,6 +37,7 @@ const ProductCard =(props)=> {
 
           const setPath =()=> {
             navigate(`/${category}/${title}`, {state: props.product})
+            window.scrollTo(0,0)
           }
 
 return (

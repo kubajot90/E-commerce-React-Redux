@@ -1,0 +1,28 @@
+.topScrollButton {
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 130px 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.251);
+    cursor: pointer;
+    z-index: 999;
+    opacity: 0;
+    transition: .5s;
+}
+
+.topScrollButtonHidden {
+    opacity: 1;
+}
+
+.topScrollButton__icon {
+    font-size: 1.5rem;
+    transform: rotate(-90deg);
+}
