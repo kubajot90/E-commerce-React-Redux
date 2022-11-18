@@ -16,11 +16,16 @@ const AccordionSection =(props)=> {
                 <h3 className={classes.accordion__title}>
                     {props.item.title}
                 </h3>
-                <IoIosArrowDown className={classes.accordion__titleIcon} onClick={ expandSection }/>
+                <IoIosArrowDown className={`${classes.accordion__titleIcon} ${isExpand ? classes.accordion__titleIconRotate : ''}`
+                    } onClick={ expandSection }/>
             </div>
-            { isExpand && <p className={classes.accordion__text}>
+            <p className={
+                `${classes.accordion__text} ${isExpand ? classes.accordion__textExpand : ''}`}>
                 {props.item.text} 
-            </p> }
+            </p>
+            {/* { isExpand && <p className={classes.accordion__text}>
+                {props.item.text} 
+            </p> } */}
         </div>
     )
 }

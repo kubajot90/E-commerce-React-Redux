@@ -1,13 +1,17 @@
 .accordion__section {
     border-bottom: 2px solid grey;
-    transition: .2s;
+    overflow: hidden;
+    transition: .3s;
 }
 
 .accordion__titleBox {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     padding: 20px 0;
+    background-color: #fff;
+    z-index: 99;
 }
 
 .accordion__title {
@@ -16,10 +20,23 @@
 
 .accordion__titleIcon {
     font-size: 1.4rem;
+    transition: .3s;
+}
+
+.accordion__titleIconRotate {
+    transform: rotate(180deg);
 }
 
 .accordion__text {
     font-size: .75rem;
     line-height: 1.4rem;
+    height: 0px;
+    transform: translateY(-100%);
+    transition: .3s;
+}
+
+.accordion__textExpand {
     margin-bottom: 20px;
+    transform: translateY(0);
+    height: auto;
 }
