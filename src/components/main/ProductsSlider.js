@@ -30,19 +30,21 @@ const Products =(props)=> {
 ///////////////////
 
 useEffect(() => {
-    const ref = productRef.current;
+    if (props.observer){
+        const ref = productRef.current;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if(entry.isIntersecting){
+                    navigate(`/#${category}`);
+                    dispatch(categoryActions.toggleActiveHash(`#${category}`));
+                }
+            }, 
+        );
+        ref && observer.observe(ref);
 
-    const observer = new IntersectionObserver(
-        ([entry]) => {
-            if(entry.isIntersecting){
-                navigate(`/#${category}`);
-                dispatch(categoryActions.toggleActiveHash(`#${category}`));
-            }
-        }, 
-    );
-    ref && observer.observe(ref);
-
-    return () => observer.unobserve(ref);
+        return () => observer.unobserve(ref)
+    }
+    
 }, []);
 
 

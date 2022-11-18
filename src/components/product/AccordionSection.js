@@ -12,12 +12,12 @@ const AccordionSection =(props)=> {
 
     return (
         <div className={classes.accordion__section}>
-            <div className={classes.accordion__titleBox}>
+            <div className={classes.accordion__titleBox} onClick={ expandSection }>
                 <h3 className={classes.accordion__title}>
                     {props.item.title}
                 </h3>
                 <IoIosArrowDown className={`${classes.accordion__titleIcon} ${isExpand ? classes.accordion__titleIconRotate : ''}`
-                    } onClick={ expandSection }/>
+                    }/>
             </div>
             <p className={
                 `${classes.accordion__text} ${isExpand ? classes.accordion__textExpand : ''}`}>

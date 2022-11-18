@@ -17,9 +17,9 @@ import fetchProductsData from '../../store/productsSlice'
     return(
         <>
             <HeroVideoBaner/>
-            {fetchProducts && <ProductsSlider category={"women's clothing"}/>}
-            {fetchProducts && <ProductsSlider category={"men's clothing"}/>}
-            {fetchProducts && <ProductsSlider category={"jewelery"}/>}
+            {fetchProducts && <ProductsSlider category={"women's clothing"} observer={true}/>}
+            {fetchProducts && <ProductsSlider category={"men's clothing"} observer={true}/>}
+            {fetchProducts && <ProductsSlider category={"jewelery"} observer={true}/>}
         </>
     )
  }

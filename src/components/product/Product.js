@@ -1,18 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import Accordion from './Accordion';
-import classes from './Product.module.css';
+import ProductsSlider from '../main/ProductsSlider';
+import Footer from '../main/Footer'
 import { BsHeart, BsTruck, BsSuitClub, BsHandbag } from 'react-icons/bs';
 import { AiOutlineFieldTime } from 'react-icons/ai';
+import classes from './Product.module.css';
+import fetchProductsData from '../../store/productsSlice'
 
 
 const Product =()=> {
+    const fetchProducts = useSelector(state => state.products.data);
+    const dispatch = useDispatch();
+  
     const location = useLocation();
 
     const {image, title, price, description, category} = location.state;
     const categoryUrl = category.replace(/\s/g,'_');
     const discount = Math.floor(Math.random() * 45)
+
+    
+    useEffect(()=>{
+        window.scrollTo(0,0)
+        dispatch(fetchProductsData())
+        },[])
         
     const discountPrice =()=> {
        return (price * ( discount/100 )).toFixed(2)
@@ -107,10 +120,16 @@ const Product =()=> {
                                 <BsSuitClub className={classes.product__informationIcon}/>
                                 <span>Save with E-shop Club</span>  
                             </div>
-                            <Accordion description={description}/>  
+                             
                         </div>
+                            <Accordion description={description}/> 
                 </div>
             </div>
+            <div className={classes.product__similar}>
+                <p className={classes.similar__title}>Similar products</p>
+                { fetchProducts && <ProductsSlider category={category} observer={false}/> }
+            </div>
+            <Footer/>
         </div>
     )
 }
