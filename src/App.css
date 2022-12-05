@@ -1,5 +1,6 @@
 :root {
-    --mainPadding: 50px
+    --mainPadding: 50px;
+    --mainMargin: 70px;
 }
 
 .App {

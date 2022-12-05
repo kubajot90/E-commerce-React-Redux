@@ -1,0 +1,32 @@
+.imageContainer {
+    position: relative;
+    padding: 0 var(--mainPadding);
+    margin: var(--mainMargin) 0;
+}
+
+.image {
+    width: 100%;
+}
+
+.contentContainer {
+    position: absolute;
+    top: 35%;
+    right: 15%;
+}
+
+.button {
+    margin-top: 15px;
+    margin-left: 5px;
+    width: 140px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    border: none;
+    z-index: 99;
+    cursor: pointer;
+}
+
+.title {
+    /* font-size: 2.2rem; */
+    font-size: 2.9vw;
+}
