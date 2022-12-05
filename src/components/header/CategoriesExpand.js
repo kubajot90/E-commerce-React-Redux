@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import ExpandListItem from './ExpandListItem';
 // import { counterActions, visibleActions } from '../../store/store';
 import classes from './CategoriesExpand.module.css';
 
@@ -42,7 +43,7 @@ const CategoriesExpand =(props)=>{
                 <div className={classes.currentCategoryProducts}>
                 <h4>{mainProduct.title}</h4>
                 <br/>
-                 {currentCategoryItems.map((product)=><li key={product.id} className={classes.items}>{product.title}</li>)}   
+                 {currentCategoryItems.map((product)=><ExpandListItem key={product.id} title={product.title} product={product}/>)}   
                 </div>
                 
 
@@ -51,8 +52,7 @@ const CategoriesExpand =(props)=>{
                     <br/> 
                     <h4>{category}</h4>
                     {dataFetch.filter((item)=>item.category === category)
-                    .map((item)=>
-                        <li key={item.id} className={classes.items}>{item.title}</li>)}
+                    .map((product)=> <ExpandListItem key={product.id} title={product.title} product={product}/>)}
                 </div>
                 ) }
             </ul>

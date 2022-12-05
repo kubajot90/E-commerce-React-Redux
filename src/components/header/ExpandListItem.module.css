@@ -1,0 +1,6 @@
+.items {
+    margin-left: 5px;
+    margin-top: 10px;
+    list-style: none;
+    transition: .1s;
+}
