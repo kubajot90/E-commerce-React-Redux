@@ -17,10 +17,11 @@
 .button {
     margin-top: 15px;
     margin-left: 5px;
-    width: 140px;
-    height: 40px;
+    width: 11vw;
+    height: 3.125vw;
     background-color: black;
     color: white;
+    font-size: 1.1vw;
     border: none;
     z-index: 99;
     cursor: pointer;

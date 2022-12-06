@@ -3,7 +3,8 @@ import { useEffect, useRef } from 'react';
 import HeroVideoBaner from './HeroVideoBaner';
 import ProductsSlider from './ProductsSlider';
 import fetchProductsData from '../../store/productsSlice';
-import Baner_1 from './baners/Baner_1';
+import Baner1 from './baners/Baner1';
+import Baner2 from './baners/Baner2';
 
 
  const Main =()=> {
@@ -20,8 +21,9 @@ import Baner_1 from './baners/Baner_1';
         <>
             <HeroVideoBaner/>
             {fetchProducts && <ProductsSlider category={"women's clothing"} observer={true}/>}
-            <Baner_1/>
+            <Baner1/>
             {fetchProducts && <ProductsSlider category={"men's clothing"} observer={true}/>}
+            <Baner2/>
             {fetchProducts && <ProductsSlider category={"jewelery"} observer={true}/>}
         </>
     )
