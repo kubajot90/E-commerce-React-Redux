@@ -4,6 +4,12 @@
     overflow: hidden;
 }
 
+.productsTitle {
+    margin-left: var(--mainPadding);
+    margin-bottom: 5vw;
+    font-size: 2.5vw;
+}
+
 .products {
     min-width: 100%;
     display: flex;

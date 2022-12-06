@@ -20,11 +20,11 @@ import Baner2 from './baners/Baner2';
     return(
         <>
             <HeroVideoBaner/>
-            {fetchProducts && <ProductsSlider category={"women's clothing"} observer={true}/>}
+            {fetchProducts && <ProductsSlider category={"women's clothing"} title={"women's clothing"} observer={true}/>}
             <Baner1/>
-            {fetchProducts && <ProductsSlider category={"men's clothing"} observer={true}/>}
+            {fetchProducts && <ProductsSlider category={"men's clothing"} title={"men's clothing"} observer={true}/>}
             <Baner2/>
-            {fetchProducts && <ProductsSlider category={"jewelery"} observer={true}/>}
+            {fetchProducts && <ProductsSlider category={"jewelery"} title={"jewelery"} observer={true}/>}
         </>
     )
  }

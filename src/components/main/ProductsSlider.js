@@ -98,6 +98,7 @@ useEffect(() => {
 
 return (
     <div ref={productRef} className={classes.productsBox} id={category}>
+        {props.title && <h1 className={classes.productsTitle}>{props.title}</h1>}
         <div className={classes.products} style={{transform: `translateX(${transformDistance}px)`}} ref={productsRef}>
 
        { filteredProducts.map((product,index)=> <ProductCard product={product} key={product.id} transformDistance={transformDistance} index={index} productsLength={filteredProducts.length} onTransformDistance={setDistance} isMove={isMove} onFirstProductDistance={firstProductDistance} onCancelAnimation={cancelAnimation} onCanSlideHandler={canSlideHandler}/>) }
