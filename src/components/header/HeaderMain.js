@@ -51,9 +51,15 @@ return(
         </div>
         <div className={classes.logo} onClick={moveHome}>e·Shop.</div>
         <div className={classes.iconBox}>
-            <BsPerson className={classes.icon}/>
-            <BsSuitHeart className={classes.icon}/>
-            <BsHandbag className={classes.icon}/>
+            <HashLink className={classes.hashLink}>
+                <BsPerson className={classes.icon}/>
+            </HashLink>
+            <HashLink className={classes.hashLink}>
+                <BsSuitHeart className={classes.icon}/>
+            </HashLink>
+            <HashLink to={`/cart`} className={classes.hashLink}>
+                <BsHandbag className={classes.icon}/>
+            </HashLink>
         </div>
     </div>
 )

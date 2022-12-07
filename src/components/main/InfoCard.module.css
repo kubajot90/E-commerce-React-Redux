@@ -13,7 +13,7 @@
     text-align: center;
     font-size: 1.7vw;
     white-space: nowrap;
-    background-color: rgb(255, 234, 0);
+    background-color: var(--yellowColor);
 }
 
 .description {

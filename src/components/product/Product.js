@@ -4,15 +4,17 @@ import { useLocation, Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import Accordion from './Accordion';
 import ProductsSlider from '../main/ProductsSlider';
-import Footer from '../main/Footer'
-import { BsHeart, BsTruck, BsSuitClub, BsHandbag } from 'react-icons/bs';
-import { AiOutlineFieldTime } from 'react-icons/ai';
+// import Footer from '../main/Footer';
+import InformationBox from './InformationBox';
+import { BsHeart, BsHandbag } from 'react-icons/bs';
 import classes from './Product.module.css';
-import fetchProductsData from '../../store/productsSlice'
+import fetchProductsData from '../../store/productsSlice';
+import { cartActions } from '../../store/cartSlice';
 
 
 const Product =()=> {
     const fetchProducts = useSelector(state => state.products.data);
+    const products = useSelector(state => state.cart.products);
     const dispatch = useDispatch();
   
     const location = useLocation();
@@ -25,7 +27,13 @@ const Product =()=> {
     useEffect(()=>{
         window.scrollTo(0,0)
         dispatch(fetchProductsData())
-        },[])
+        },[]);
+    
+    const addToCart =()=> {
+        const product = location.state;
+        dispatch(cartActions.addToCart(product))
+        console.log('products: ', products);
+    }
         
     const discountPrice =()=> {
        return (price * ( discount/100 )).toFixed(2)
@@ -37,7 +45,7 @@ const Product =()=> {
     const planetFriendly = isClothes &&
         <div className={classes.product__eco}>
             Planet Friendly
-        </div>
+        </div>;
 
     return(
         <div className={classes.product}>
@@ -99,7 +107,7 @@ const Product =()=> {
                             <option value="XXL">XXL</option>
                         </select> }
                         <div className={classes.product__buttons}>
-                            <button className={classes.product__buttonAdd}>
+                            <button onClick={addToCart} className={classes.product__buttonAdd}>
                                 Add to cart
                                 <BsHandbag className={classes.product__buttonBag}/>
                             </button>
@@ -107,21 +115,7 @@ const Product =()=> {
                                 <BsHeart className={classes.product__buttonHearth}/>
                             </button>
                         </div>
-                        <div className={classes.product__informationsBox}>
-                            <div className={classes.product__information}>
-                                <BsTruck className={classes.product__informationIcon}/>
-                                <span>Free delivery and returns</span>  
-                            </div>
-                            <div className={classes.product__information}>
-                                <AiOutlineFieldTime className={classes.product__informationIcon}/>
-                                <span>Shipping 24h</span>  
-                            </div>
-                            <div className={classes.product__information}>
-                                <BsSuitClub className={classes.product__informationIcon}/>
-                                <span>Save with E-shop Club</span>  
-                            </div>
-                             
-                        </div>
+                        <InformationBox/>
                             <Accordion description={description}/> 
                 </div>
             </div>
@@ -129,7 +123,7 @@ const Product =()=> {
                 <p className={classes.similar__title}>Similar products</p>
                 { fetchProducts && <ProductsSlider category={category} observer={false}/> }
             </div>
-            <Footer/>
+            {/* <Footer/> */}
         </div>
     )
 }

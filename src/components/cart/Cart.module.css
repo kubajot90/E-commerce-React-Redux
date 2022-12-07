@@ -1,0 +1,28 @@
+.cart {
+    display: flex;
+    padding: 30px var(--mainPadding);
+}
+
+.cart__main {
+    flex-basis: 65%;
+    padding: 25px 30px;
+    margin-right: 36px;
+    background-color: var(--grayColor);
+}
+
+.cart__details {
+    flex-basis: 35%;
+}
+
+.cart__header {
+
+}
+
+.header__title {
+
+}
+
+.header__amount {
+
+}
+

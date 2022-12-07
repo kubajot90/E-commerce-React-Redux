@@ -185,23 +185,6 @@
     font-size: 1.5rem;
 }
 
-.product__informationsBox {
-    padding: 15px 0;
-}
-
-.product__information {
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-    font-size: 0.75rem;
-    margin: 15px 0;
-}
-
-.product__informationIcon {
-    font-size: 1.7rem;
-    margin: 0 15px 0 4px;
-}
-
 .product__similar {
     margin: 20px 0 30px;
     padding-bottom: 30px;

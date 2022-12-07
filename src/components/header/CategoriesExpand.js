@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ExpandListItem from './ExpandListItem';
-// import { counterActions, visibleActions } from '../../store/store';
 import classes from './CategoriesExpand.module.css';
 
 const CategoriesExpand =(props)=>{
