@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import Accordion from './Accordion';
 import ProductsSlider from '../main/ProductsSlider';
-// import Footer from '../main/Footer';
 import InformationBox from './InformationBox';
 import { BsHeart, BsHandbag } from 'react-icons/bs';
 import classes from './Product.module.css';
@@ -13,30 +12,38 @@ import { cartActions } from '../../store/cartSlice';
 
 
 const Product =()=> {
+    const sizeSelectRef = useRef();
     const fetchProducts = useSelector(state => state.products.data);
-    const products = useSelector(state => state.cart.products);
+    const products = useSelector(state => state.cart.productsInCart);
     const dispatch = useDispatch();
   
     const location = useLocation();
 
     const {image, title, price, description, category} = location.state;
     const categoryUrl = category.replace(/\s/g,'_');
-    const discount = Math.floor(Math.random() * 45)
+    
+    const [discount, setDiscount] = useState(Math.floor(Math.random() * 45));
+    const [discountPrice, setDiscountPrice] = useState(0);
 
     
     useEffect(()=>{
-        window.scrollTo(0,0)
-        dispatch(fetchProductsData())
+        window.scrollTo(0,0);
+        dispatch(fetchProductsData());
+        calculateDiscount();
         },[]);
     
     const addToCart =()=> {
-        const product = location.state;
-        dispatch(cartActions.addToCart(product))
+        const product = {
+            ...location.state, 
+            size: sizeSelectRef.current.value,
+            amount: 1
+        };
+        dispatch(cartActions.addToCart(product));
         console.log('products: ', products);
     }
         
-    const discountPrice =()=> {
-       return (price * ( discount/100 )).toFixed(2)
+    const calculateDiscount =()=> {
+        setDiscountPrice((price * ( (100 - discount) / 100 )).toFixed(2))
     }
 
     const isClothes = category === "women's clothing" ||
@@ -59,8 +66,11 @@ const Product =()=> {
                         <span className={classes.breadCrumbs__arrow}>{`>`}</span>
                 </li>
                 <li>
-                    <HashLink to={`/#${categoryUrl}`} className={classes.breadCrumbs__link}>
-                        <span className={classes.breadCrumbs__span} >
+                    <HashLink 
+                        to={`/#${categoryUrl}`} 
+                        className={classes.breadCrumbs__link}
+                    >
+                        <span className={classes.breadCrumbs__span}>
                             {category}
                         </span>
                     </HashLink>
@@ -95,10 +105,10 @@ const Product =()=> {
                             { isClothes && <div className={classes.product__eco}>Planet Friendly</div> }
                         </div>
                         <div className={classes.product__priceBox}>
-                            <div className={classes.product__priceSales}>{`${discountPrice()} PLN`}</div>
+                            <div className={classes.product__priceSales}>{`${discountPrice} PLN`}</div>
                             <div className={classes.product__price}>{`${price} PLN`}</div>
                         </div>
-                        { isClothes && <select className={classes.product__select}>
+                        { isClothes && <select ref={sizeSelectRef} className={classes.product__select}>
                             <option value="">Please choose your size</option>
                             <option value="S">S</option>
                             <option value="M">M</option>
@@ -123,7 +133,6 @@ const Product =()=> {
                 <p className={classes.similar__title}>Similar products</p>
                 { fetchProducts && <ProductsSlider category={category} observer={false}/> }
             </div>
-            {/* <Footer/> */}
         </div>
     )
 }

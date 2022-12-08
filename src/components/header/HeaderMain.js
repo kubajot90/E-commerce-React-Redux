@@ -34,7 +34,8 @@ const HeaderMain =()=> {
     }
 
     const moveHome =()=> {
-        navigate('/')
+        navigate('/');
+        window.scrollTo(0,0);
     }
 
 return(

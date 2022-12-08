@@ -41,7 +41,11 @@ const ProductCard =(props)=> {
           }
 
 return (
-<div onClick={setPath} className={classes.productCard} ref={productRef}>
+<div 
+  onClick={setPath} 
+  className={classes.productCard} 
+  ref={productRef}
+>
     <div style={{backgroundImage :`url(${props.product.image})`}} className={classes.productImage} alt='product'></div>
     <div className={classes.productDescription}>
         <p className={classes.productTitle}>{props.product.title}</p>
