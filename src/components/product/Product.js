@@ -5,14 +5,23 @@ import { HashLink } from 'react-router-hash-link';
 import Accordion from './Accordion';
 import ProductsSlider from '../main/ProductsSlider';
 import InformationBox from './InformationBox';
+import Select from 'react-select';
 import { BsHeart, BsHandbag } from 'react-icons/bs';
 import classes from './Product.module.css';
 import fetchProductsData from '../../store/productsSlice';
 import { cartActions } from '../../store/cartSlice';
 
+const options = [
+    { value: "", label: "Chose your size" },
+    { value: "S", label: "S" },
+    { value: "L", label: "L" },
+    { value: "XL", label: "XL" },
+    { value: "XXL", label: "XXL" }
+  ];
 
 const Product =()=> {
-    const sizeSelectRef = useRef();
+    const [selectValue, setSelectValue] = useState('')
+    const sizeSelectRef = useRef('');
     const fetchProducts = useSelector(state => state.products.data);
     const products = useSelector(state => state.cart.productsInCart);
     const dispatch = useDispatch();
@@ -24,6 +33,7 @@ const Product =()=> {
     
     const [discount, setDiscount] = useState(Math.floor(Math.random() * 45));
     const [discountPrice, setDiscountPrice] = useState(0);
+    const [buttonText, setButtonText] = useState('Add to cart');
 
     
     useEffect(()=>{
@@ -33,14 +43,30 @@ const Product =()=> {
         },[]);
     
     const addToCart =()=> {
-        const product = {
-            ...location.state, 
-            size: sizeSelectRef.current.value,
-            amount: 1
-        };
-        dispatch(cartActions.addToCart(product));
+        if(!selectValue) {
+            console.log('focus');
+            sizeSelectRef.current.focus();
+            console.log('focus---after');
+
+        }else{
+            console.log('----------add');
+            const product = {
+                ...location.state, 
+                size: sizeSelectRef.current.value,
+                amount: 1
+            };
+            dispatch(cartActions.addToCart(product));
+        }
         console.log('products: ', products);
     }
+
+    useEffect(()=>{
+        checkIsAdded()
+        },[products]);
+
+    useEffect(()=>{
+        checkIsAdded()
+        },[selectValue]);
         
     const calculateDiscount =()=> {
         setDiscountPrice((price * ( (100 - discount) / 100 )).toFixed(2))
@@ -53,6 +79,18 @@ const Product =()=> {
         <div className={classes.product__eco}>
             Planet Friendly
         </div>;
+    
+    const checkIsAdded = () => {
+        const currentProductId = location.state.id;
+        // const size = sizeSelectRef.current.value;
+        const size = selectValue.value;
+        const isAdded = products.filter(product =>
+        currentProductId === product.id && size === product.size
+        );
+        // console.log('isAdded', isAdded.length);
+        console.log('size', size);
+        setButtonText(isAdded.length ? 'Already added to cart' : 'Add to cart');
+    }
 
     return(
         <div className={classes.product}>
@@ -101,24 +139,53 @@ const Product =()=> {
                         </div>
                     </div>
                         <div className={classes.product__discountBox}>
-                            <div className={classes.product__discount}>{`-${discount}%`}</div>
+                            {discount > 0 && 
+                                <div className={classes.product__discount}>
+                                    {`-${discount}%`}
+                                </div>}
                             { isClothes && <div className={classes.product__eco}>Planet Friendly</div> }
                         </div>
                         <div className={classes.product__priceBox}>
-                            <div className={classes.product__priceSales}>{`${discountPrice} PLN`}</div>
-                            <div className={classes.product__price}>{`${price} PLN`}</div>
+                            {discount > 0 && <div className={classes.product__priceSales}>
+                                {`${discountPrice} PLN`}
+                            </div>}
+                            <div
+                                className={`${classes.product__price} ${discount < 1 ? classes.product__priceActive : '' }`}>
+                                {`${price} PLN`}
+                            </div>
                         </div>
-                        { isClothes && <select ref={sizeSelectRef} className={classes.product__select}>
-                            <option value="">Please choose your size</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                            <option value="XXL">XXL</option>
-                        </select> }
+                        { isClothes && 
+                        <Select
+                            ref={sizeSelectRef}
+                            openMenuOnFocus={true}
+                            // defaultValue={''}
+                            // value={selectValue}
+                            placeholder={'chose your size'}
+                            onChange={setSelectValue}
+                            options={options}
+                            className={classes.product__select}
+                        />
+                        // <ProductSelect 
+                        // ref={sizeSelectRef}
+                        // onCheckIsAdded={checkIsAdded} 
+                        // className={classes.product__select}/>
+
+                        // <Select
+                        // onChange={checkIsAdded}
+                        // ref={sizeSelectRef}
+                        // openMenuOnFocus={true}
+                        // className={classes.product__select}>
+                        //     <option value="">Please choose your size</option>
+                        //     <option value="S">S</option>
+                        //     <option value="M">M</option>
+                        //     <option value="L">L</option>
+                        //     <option value="XL">XL</option>
+                        //     <option value="XXL">XXL</option>
+                        // </Select>
+                        }
                         <div className={classes.product__buttons}>
                             <button onClick={addToCart} className={classes.product__buttonAdd}>
-                                Add to cart
+                                {buttonText}
                                 <BsHandbag className={classes.product__buttonBag}/>
                             </button>
                             <button className={classes.product__buttonFavorite}>
@@ -132,7 +199,7 @@ const Product =()=> {
             <div className={classes.product__similar}>
                 <p className={classes.similar__title}>Similar products</p>
                 { fetchProducts && <ProductsSlider category={category} observer={false}/> }
-            </div>
+            </div>   
         </div>
     )
 }
