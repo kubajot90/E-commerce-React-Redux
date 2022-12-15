@@ -20,13 +20,15 @@ const options = [
   ];
 
 const Product =()=> {
-    const [selectValue, setSelectValue] = useState('')
+    const [selectValue, setSelectValue] = useState('');
+    const [amount, setAmount] = useState(1);
     const sizeSelectRef = useRef('');
     const fetchProducts = useSelector(state => state.products.data);
     const products = useSelector(state => state.cart.productsInCart);
     const dispatch = useDispatch();
   
     const location = useLocation();
+    const currentProduct = location.state;
 
     const {image, title, price, description, category} = location.state;
     const categoryUrl = category.replace(/\s/g,'_');
@@ -43,17 +45,17 @@ const Product =()=> {
         },[]);
     
     const addToCart =()=> {
+        checkIsAdded()
         if(!selectValue) {
-            console.log('focus');
             sizeSelectRef.current.focus();
-            console.log('focus---after');
-
         }else{
-            console.log('----------add');
+            console.log('----------add', amount);
+            // currentProduct.id = `${currentProduct.id}-${selectValue.value}`
             const product = {
-                ...location.state, 
-                size: sizeSelectRef.current.value,
-                amount: 1
+                // ...location.state, 
+                ...currentProduct, 
+                size: selectValue.value,
+                amount
             };
             dispatch(cartActions.addToCart(product));
         }
@@ -62,11 +64,11 @@ const Product =()=> {
 
     useEffect(()=>{
         checkIsAdded()
-        },[products]);
+        },[products, selectValue]);
 
-    useEffect(()=>{
-        checkIsAdded()
-        },[selectValue]);
+    // useEffect(()=>{
+    //     checkIsAdded()
+    //     },[selectValue]);
         
     const calculateDiscount =()=> {
         setDiscountPrice((price * ( (100 - discount) / 100 )).toFixed(2))
@@ -81,15 +83,18 @@ const Product =()=> {
         </div>;
     
     const checkIsAdded = () => {
-        const currentProductId = location.state.id;
-        // const size = sizeSelectRef.current.value;
         const size = selectValue.value;
         const isAdded = products.filter(product =>
-        currentProductId === product.id && size === product.size
+        currentProduct.id === product.id && size === product.size
         );
-        // console.log('isAdded', isAdded.length);
-        console.log('size', size);
-        setButtonText(isAdded.length ? 'Already added to cart' : 'Add to cart');
+        console.log('isAdded', isAdded);
+       
+        if(isAdded.length) {
+            setButtonText('Already added to cart');
+            setAmount(isAdded.length + 1); 
+        }else{
+            setButtonText('Add to cart');
+        };
     }
 
     return(
@@ -158,30 +163,11 @@ const Product =()=> {
                         <Select
                             ref={sizeSelectRef}
                             openMenuOnFocus={true}
-                            // defaultValue={''}
-                            // value={selectValue}
                             placeholder={'chose your size'}
                             onChange={setSelectValue}
                             options={options}
                             className={classes.product__select}
                         />
-                        // <ProductSelect 
-                        // ref={sizeSelectRef}
-                        // onCheckIsAdded={checkIsAdded} 
-                        // className={classes.product__select}/>
-
-                        // <Select
-                        // onChange={checkIsAdded}
-                        // ref={sizeSelectRef}
-                        // openMenuOnFocus={true}
-                        // className={classes.product__select}>
-                        //     <option value="">Please choose your size</option>
-                        //     <option value="S">S</option>
-                        //     <option value="M">M</option>
-                        //     <option value="L">L</option>
-                        //     <option value="XL">XL</option>
-                        //     <option value="XXL">XXL</option>
-                        // </Select>
                         }
                         <div className={classes.product__buttons}>
                             <button onClick={addToCart} className={classes.product__buttonAdd}>
