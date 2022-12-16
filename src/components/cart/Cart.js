@@ -7,6 +7,29 @@ import classes from './Cart.module.css';
 const Cart =()=> {
     const productsInCart = useSelector(state => state.cart.productsInCart);
 
+    const noDuplicates =()=> {
+        const productsToRender = [...productsInCart]
+
+        productsToRender.forEach((product) => {
+            const products = productsToRender.filter(item => item.key === product.key);
+            console.log('duplicates...',products);
+            if(products.length === 1) {
+                // productsToRender.push(product)
+            } else if(products.length > 1) {
+                const duplicates = products.sort((a,b)=>b.amount - a.amount).slice(1);
+                // const duplicatesToRemove = products.sort((a,b)=>b.amount - a.amount).slice(1);
+                duplicates.forEach(item => {
+                    const index = productsToRender.indexOf(item);
+                    productsToRender.splice(index,1);
+                })
+
+                // productsToRender.push(withoutDuplicates) 
+
+            }
+        })
+        return productsToRender;
+    };
+
     // const withoutDuplicates =()=> {
         // let productsWithoutDuplicates = [];
         // console.log('productsInCart', productsInCart);
@@ -37,8 +60,8 @@ const Cart =()=> {
                     <span className={classes.header__amount}>2</span>
                 </div>
                 <ul className={classes.cart__list}>
-                    {productsInCart.map((product)=> 
-                        <CartItem product={product} key={product.id}/>
+                    {noDuplicates().map((product)=> 
+                        <CartItem product={product} key={product.key}/>
                         )}
                 </ul>
             </div>

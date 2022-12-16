@@ -21,7 +21,7 @@ const options = [
 
 const Product =()=> {
     const [selectValue, setSelectValue] = useState('');
-    const [amount, setAmount] = useState(1);
+    const [amount, setAmount] = useState(null);
     const sizeSelectRef = useRef('');
     const fetchProducts = useSelector(state => state.products.data);
     const products = useSelector(state => state.cart.productsInCart);
@@ -49,17 +49,32 @@ const Product =()=> {
         if(!selectValue) {
             sizeSelectRef.current.focus();
         }else{
-            console.log('----------add', amount);
-            // currentProduct.id = `${currentProduct.id}-${selectValue.value}`
             const product = {
-                // ...location.state, 
                 ...currentProduct, 
                 size: selectValue.value,
-                amount
+                amount,
+                key: `${currentProduct.id}${selectValue.value}`
             };
             dispatch(cartActions.addToCart(product));
         }
         console.log('products: ', products);
+    }
+
+    const checkIsAdded = () => {
+        const size = selectValue.value;
+        const isAdded = products.filter(product =>
+        currentProduct.id === product.id && size === product.size
+        );
+        console.log('isAdded', isAdded);
+       
+        if(isAdded.length) {
+            setButtonText('Already added to cart');
+            isAdded.length === 1 ? setAmount(1) : setAmount(isAdded.length + 1)
+
+            // setAmount(isAdded.length + 1); 
+        }else{
+            setButtonText('Add to cart');
+        };
     }
 
     useEffect(()=>{
@@ -77,25 +92,12 @@ const Product =()=> {
     const isClothes = category === "women's clothing" ||
     category === "men's clothing"
 
-    const planetFriendly = isClothes &&
-        <div className={classes.product__eco}>
-            Planet Friendly
-        </div>;
+    // const planetFriendly = isClothes &&
+    //     <div className={classes.product__eco}>
+    //         Planet Friendly
+    //     </div>;
     
-    const checkIsAdded = () => {
-        const size = selectValue.value;
-        const isAdded = products.filter(product =>
-        currentProduct.id === product.id && size === product.size
-        );
-        console.log('isAdded', isAdded);
-       
-        if(isAdded.length) {
-            setButtonText('Already added to cart');
-            setAmount(isAdded.length + 1); 
-        }else{
-            setButtonText('Add to cart');
-        };
-    }
+   
 
     return(
         <div className={classes.product}>
