@@ -21,7 +21,7 @@ const options = [
 
 const Product =()=> {
     const [selectValue, setSelectValue] = useState('');
-    const [amount, setAmount] = useState(null);
+    const [productsAmount, setProductsAmount] = useState(null);
     const sizeSelectRef = useRef('');
     const fetchProducts = useSelector(state => state.products.data);
     const products = useSelector(state => state.cart.productsInCart);
@@ -45,45 +45,44 @@ const Product =()=> {
         },[]);
     
     const addToCart =()=> {
-        checkIsAdded()
         if(!selectValue) {
             sizeSelectRef.current.focus();
         }else{
+            const amount = !productsAmount ? 1 : productsAmount + 1;
+
             const product = {
                 ...currentProduct, 
                 size: selectValue.value,
-                amount,
+                amount: amount,
                 key: `${currentProduct.id}${selectValue.value}`
             };
             dispatch(cartActions.addToCart(product));
         }
-        console.log('products: ', products);
     }
 
-    const checkIsAdded = () => {
+    const checkProductsAmount = () => {
         const size = selectValue.value;
         const isAdded = products.filter(product =>
         currentProduct.id === product.id && size === product.size
         );
-        console.log('isAdded', isAdded);
-       
-        if(isAdded.length) {
-            setButtonText('Already added to cart');
-            isAdded.length === 1 ? setAmount(1) : setAmount(isAdded.length + 1)
+        setProductsAmount(isAdded.length);
+    }
 
-            // setAmount(isAdded.length + 1); 
-        }else{
+    const changeButtonName =()=> {
+        if(productsAmount) {
+            setButtonText('Already added to cart');
+        } else {
             setButtonText('Add to cart');
         };
     }
 
     useEffect(()=>{
-        checkIsAdded()
+        checkProductsAmount();
         },[products, selectValue]);
 
-    // useEffect(()=>{
-    //     checkIsAdded()
-    //     },[selectValue]);
+    useEffect(()=>{
+        changeButtonName();
+        },[productsAmount]);
         
     const calculateDiscount =()=> {
         setDiscountPrice((price * ( (100 - discount) / 100 )).toFixed(2))
@@ -91,13 +90,6 @@ const Product =()=> {
 
     const isClothes = category === "women's clothing" ||
     category === "men's clothing"
-
-    // const planetFriendly = isClothes &&
-    //     <div className={classes.product__eco}>
-    //         Planet Friendly
-    //     </div>;
-    
-   
 
     return(
         <div className={classes.product}>
