@@ -45,19 +45,26 @@ const Product =()=> {
         },[]);
     
     const addToCart =()=> {
-        if(!selectValue) {
-            sizeSelectRef.current.focus();
-        }else{
-            const amount = !productsAmount ? 1 : productsAmount + 1;
+        let product ={};
 
-            const product = {
+        if(!selectValue && isClothes) {
+            sizeSelectRef.current.focus();
+        } else if(isClothes) {
+            // const amount = !productsAmount ? 1 : productsAmount + 1;
+
+            product = {
                 ...currentProduct, 
                 size: selectValue.value,
-                amount: amount,
+                // amount: amount,
                 key: `${currentProduct.id}${selectValue.value}`
             };
-            dispatch(cartActions.addToCart(product));
+        } else if(!isClothes) {
+            product = {
+                ...currentProduct, 
+                key: `${currentProduct.id}${productsAmount}`
+            };
         }
+        dispatch(cartActions.addToCart(product));
     }
 
     const checkProductsAmount = () => {

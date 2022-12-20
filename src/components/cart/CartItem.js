@@ -1,9 +1,22 @@
+import { useState } from 'react';
 import { BsHeart } from 'react-icons/bs';
 import { GrClose } from 'react-icons/gr';
 import classes from './CartItem.module.css';
 
 const CartItem =(props)=> {
-    const {title, image, price, size, amount} = props.product
+    const [amount, setAmount] = useState(props.amount);
+    const {title, image, price, size} = props.product
+
+    const increaseAmount =()=> {
+        setAmount(prev => prev + 1)
+    }
+
+    const decreaseAmount =()=> {
+        setAmount(prev => {
+           return prev > 1 ? prev - 1 : prev; 
+    })
+    }
+
     return(
         <div className={classes.cartItem}>
             <div className={classes.cartItem__imageContainer}>
@@ -40,11 +53,11 @@ const CartItem =(props)=> {
                         Amount
                     </p>
                     <div className={classes.attribute__counter}>
-                        <button className={classes.attribute__button}>
+                        <button onClick={increaseAmount} className={classes.attribute__button}>
                             +
                         </button>
                         <span>{amount}</span>
-                        <button className={classes.attribute__button}>
+                        <button onClick={decreaseAmount} className={classes.attribute__button}>
                             -
                         </button>
                     </div>
