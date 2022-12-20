@@ -1,20 +1,20 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { BsHeart } from 'react-icons/bs';
 import { GrClose } from 'react-icons/gr';
 import classes from './CartItem.module.css';
 
 const CartItem =(props)=> {
-    const [amount, setAmount] = useState(props.amount);
-    const {title, image, price, size} = props.product
+    const {title, image, price, size, id} = props.product
+    const productsAmount = useSelector(state => state.cart.productsAmount);
+    const amount = size ? productsAmount[`${id}${size}`] : productsAmount[id] ;
 
     const increaseAmount =()=> {
-        setAmount(prev => prev + 1)
+        // setAmount(prev => prev + 1)
     }
 
     const decreaseAmount =()=> {
-        setAmount(prev => {
-           return prev > 1 ? prev - 1 : prev; 
-    })
+        // setAmount(prev => prev > 1 ? prev - 1 : prev )
     }
 
     return(

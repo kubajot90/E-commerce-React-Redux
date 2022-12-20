@@ -30,7 +30,7 @@ const Product =()=> {
     const location = useLocation();
     const currentProduct = location.state;
 
-    const {image, title, price, description, category} = location.state;
+    const {image, title, price, description, category, id} = location.state;
     const categoryUrl = category.replace(/\s/g,'_');
     
     const [discount, setDiscount] = useState(Math.floor(Math.random() * 45));
@@ -55,24 +55,34 @@ const Product =()=> {
             product = {
                 ...currentProduct, 
                 size: selectValue.value,
+                id : `${currentProduct.id}${selectValue.value}`,
                 // amount: amount,
-                key: `${currentProduct.id}${selectValue.value}`
+                key: `${currentProduct.id}${selectValue.value}`,
+                // key: `${currentProduct.id}${selectValue.value}`
             };
         } else if(!isClothes) {
             product = {
                 ...currentProduct, 
-                key: `${currentProduct.id}${productsAmount}`
+                key: id
             };
         }
         dispatch(cartActions.addToCart(product));
     }
 
     const checkProductsAmount = () => {
-        const size = selectValue.value;
-        const isAdded = products.filter(product =>
-        currentProduct.id === product.id && size === product.size
-        );
+        const size = isClothes ?  selectValue.value : null ;
+        const isAdded = isClothes 
+        ? products.filter(product =>
+        currentProduct.id === product.id && size === product.size)
+        : products.filter(product => currentProduct.id === product.id);
+
         setProductsAmount(isAdded.length);
+
+        const key = isClothes ? `${currentProduct.id}${size}` : currentProduct.id ;
+
+        const amount = { [key] : isAdded.length };
+        
+        isAdded.length && dispatch(cartActions.setProductsAmount(amount));
     }
 
     const changeButtonName =()=> {
