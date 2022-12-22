@@ -25,6 +25,7 @@ const Product =()=> {
     const sizeSelectRef = useRef('');
     const fetchProducts = useSelector(state => state.products.data);
     const products = useSelector(state => state.cart.productsInCart);
+    // const productsAmount2 = useSelector(state => state.cart.productsAmount);
     const dispatch = useDispatch();
   
     const location = useLocation();
@@ -50,15 +51,11 @@ const Product =()=> {
         if(!selectValue && isClothes) {
             sizeSelectRef.current.focus();
         } else if(isClothes) {
-            // const amount = !productsAmount ? 1 : productsAmount + 1;
-
             product = {
                 ...currentProduct, 
                 size: selectValue.value,
                 id : `${currentProduct.id}${selectValue.value}`,
-                // amount: amount,
                 key: `${currentProduct.id}${selectValue.value}`,
-                // key: `${currentProduct.id}${selectValue.value}`
             };
         } else if(!isClothes) {
             product = {
@@ -71,9 +68,10 @@ const Product =()=> {
 
     const checkProductsAmount = () => {
         const size = isClothes ?  selectValue.value : null ;
+        
         const isAdded = isClothes 
         ? products.filter(product =>
-        currentProduct.id === product.id && size === product.size)
+        `${currentProduct.id}${size}` === product.id && size === product.size)
         : products.filter(product => currentProduct.id === product.id);
 
         setProductsAmount(isAdded.length);
@@ -81,7 +79,6 @@ const Product =()=> {
         const key = isClothes ? `${currentProduct.id}${size}` : currentProduct.id ;
 
         const amount = { [key] : isAdded.length };
-        
         isAdded.length && dispatch(cartActions.setProductsAmount(amount));
     }
 
@@ -95,11 +92,17 @@ const Product =()=> {
 
     useEffect(()=>{
         checkProductsAmount();
+        console.log('check prod amount useeffect');
         },[products, selectValue]);
 
     useEffect(()=>{
         changeButtonName();
+        console.log('products amount useeffect');
         },[productsAmount]);
+
+    // useEffect(()=>{
+    //     console.log('productsAmount2 useeffect');
+    //     },[productsAmount2]);
         
     const calculateDiscount =()=> {
         setDiscountPrice((price * ( (100 - discount) / 100 )).toFixed(2))

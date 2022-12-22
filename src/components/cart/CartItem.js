@@ -1,20 +1,25 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { cartActions } from '../../store/cartSlice';
 import { BsHeart } from 'react-icons/bs';
 import { GrClose } from 'react-icons/gr';
 import classes from './CartItem.module.css';
 
 const CartItem =(props)=> {
+    const dispatch = useDispatch();
     const {title, image, price, size, id} = props.product
-    const productsAmount = useSelector(state => state.cart.productsAmount);
-    const amount = size ? productsAmount[`${id}${size}`] : productsAmount[id] ;
+    const productAmount = useSelector(state => state.cart.productsAmount[id]);
+    // const amount = productsAmount[id] ;
+    // const amount = size ? productsAmount[id] : productsAmount[id] ;
 
     const increaseAmount =()=> {
         // setAmount(prev => prev + 1)
+        dispatch(cartActions.increaseAmount());
     }
-
+    
     const decreaseAmount =()=> {
         // setAmount(prev => prev > 1 ? prev - 1 : prev )
+        dispatch(cartActions.decreaseAmount(props.product));
     }
 
     return(
@@ -56,7 +61,7 @@ const CartItem =(props)=> {
                         <button onClick={increaseAmount} className={classes.attribute__button}>
                             +
                         </button>
-                        <span>{amount}</span>
+                        <span>{productAmount}</span>
                         <button onClick={decreaseAmount} className={classes.attribute__button}>
                             -
                         </button>

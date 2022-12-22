@@ -24,9 +24,9 @@ const Products =(props)=> {
        return productsRef.current.getBoundingClientRect().left
     }
 //////////////////
-    useEffect(()=>{
-        console.log(fetchProducts);
-    },[fetchProducts])
+    // useEffect(()=>{
+    //     console.log(fetchProducts);
+    // },[fetchProducts])
 ///////////////////
 
 useEffect(() => {
