@@ -8,7 +8,9 @@ import classes from './CartItem.module.css';
 const CartItem =(props)=> {
     const dispatch = useDispatch();
     const {title, image, price, size, id} = props.product
-    const productAmount = useSelector(state => state.cart.productsAmount[id]);
+    // const productAmount = useSelector(state => state.cart.productsAmount[id]);
+    const cart = useSelector(state => state.cart);
+    const [productAmount, setProductAmount] = useState(cart.productsAmount[id])
     // const amount = productsAmount[id] ;
     // const amount = size ? productsAmount[id] : productsAmount[id] ;
 
@@ -20,6 +22,14 @@ const CartItem =(props)=> {
     const decreaseAmount =()=> {
         // setAmount(prev => prev > 1 ? prev - 1 : prev )
         dispatch(cartActions.decreaseAmount(props.product));
+
+        // const key = size ? `${id}${size}` : id ;
+        const key = id ;
+
+        const amount = { [key] : productAmount - 1 };
+        dispatch(cartActions.setProductsAmount(amount));
+        setProductAmount(prev => prev - 1 );
+       
     }
 
     return(

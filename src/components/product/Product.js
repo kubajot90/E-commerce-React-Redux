@@ -25,6 +25,8 @@ const Product =()=> {
     const sizeSelectRef = useRef('');
     const fetchProducts = useSelector(state => state.products.data);
     const products = useSelector(state => state.cart.productsInCart);
+    const cart = useSelector((state) => state.cart.productsAmount);
+    const [products2, setProducts2] = useState(products);
     // const productsAmount2 = useSelector(state => state.cart.productsAmount);
     const dispatch = useDispatch();
   
@@ -33,6 +35,9 @@ const Product =()=> {
 
     const {image, title, price, description, category, id} = location.state;
     const categoryUrl = category.replace(/\s/g,'_');
+
+    const isClothes = category === "women's clothing" ||
+    category === "men's clothing";
     
     const [discount, setDiscount] = useState(Math.floor(Math.random() * 45));
     const [discountPrice, setDiscountPrice] = useState(0);
@@ -92,24 +97,15 @@ const Product =()=> {
 
     useEffect(()=>{
         checkProductsAmount();
-        console.log('check prod amount useeffect');
         },[products, selectValue]);
 
     useEffect(()=>{
         changeButtonName();
-        console.log('products amount useeffect');
         },[productsAmount]);
-
-    // useEffect(()=>{
-    //     console.log('productsAmount2 useeffect');
-    //     },[productsAmount2]);
-        
+  
     const calculateDiscount =()=> {
         setDiscountPrice((price * ( (100 - discount) / 100 )).toFixed(2))
     }
-
-    const isClothes = category === "women's clothing" ||
-    category === "men's clothing"
 
     return(
         <div className={classes.product}>
@@ -200,6 +196,10 @@ const Product =()=> {
                 <p className={classes.similar__title}>Similar products</p>
                 { fetchProducts && <ProductsSlider category={category} observer={false}/> }
             </div>   
+            <button onClick={()=>{
+                // console.log('cart', cart)
+                console.log('products in cart', products)
+        }}>NOWYYYYYYYYYYYYYY</button>
         </div>
     )
 }
