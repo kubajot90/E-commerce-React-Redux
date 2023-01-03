@@ -7,26 +7,26 @@ import classes from './CartItem.module.css';
 
 const CartItem =(props)=> {
     const dispatch = useDispatch();
-    const {title, image, price, size, id} = props.product
-    // const productAmount = useSelector(state => state.cart.productsAmount[id]);
+    const {title, image, price, size, id} = props.product;
     const cart = useSelector(state => state.cart);
-    const [productAmount, setProductAmount] = useState(cart.productsAmount[id])
-    // const amount = productsAmount[id] ;
-    // const amount = size ? productsAmount[id] : productsAmount[id] ;
+    const [productAmount, setProductAmount] = useState(cart.productsAmount[id]);
 
-    const increaseAmount =()=> {
-        // setAmount(prev => prev + 1)
-        dispatch(cartActions.increaseAmount());
+    const addToCart =()=> {
+        // dispatch(cartActions.addToCart(props.product));
+        
+        const amount = { [id] : productAmount + 1 };
+        dispatch(cartActions.setProductsAmount(amount));
+        
+        setProductAmount(prev => prev + 1 );
+        dispatch(cartActions.addToCart(props.product));
     }
     
-    const decreaseAmount =()=> {
-        // setAmount(prev => prev > 1 ? prev - 1 : prev )
-        dispatch(cartActions.decreaseAmount(props.product));
-
-        // const key = size ? `${id}${size}` : id ;
-        const key = id ;
-
-        const amount = { [key] : productAmount - 1 };
+    const removeFromCart =()=> {
+        console.log('rem from cart');
+        dispatch(cartActions.removeFromCart(props.product));
+        
+        const amount = { [id] : productAmount - 1 };
+        console.log('amount: ', amount);
         dispatch(cartActions.setProductsAmount(amount));
         setProductAmount(prev => prev - 1 );
        
@@ -68,11 +68,11 @@ const CartItem =(props)=> {
                         Amount
                     </p>
                     <div className={classes.attribute__counter}>
-                        <button onClick={increaseAmount} className={classes.attribute__button}>
+                        <button onClick={addToCart} className={classes.attribute__button}>
                             +
                         </button>
                         <span>{productAmount}</span>
-                        <button onClick={decreaseAmount} className={classes.attribute__button}>
+                        <button onClick={removeFromCart} className={classes.attribute__button}>
                             -
                         </button>
                     </div>

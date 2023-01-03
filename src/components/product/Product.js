@@ -25,9 +25,6 @@ const Product =()=> {
     const sizeSelectRef = useRef('');
     const fetchProducts = useSelector(state => state.products.data);
     const products = useSelector(state => state.cart.productsInCart);
-    const cart = useSelector((state) => state.cart.productsAmount);
-    const [products2, setProducts2] = useState(products);
-    // const productsAmount2 = useSelector(state => state.cart.productsAmount);
     const dispatch = useDispatch();
   
     const location = useLocation();
@@ -50,7 +47,9 @@ const Product =()=> {
         calculateDiscount();
         },[]);
     
+        const [number, setNumber] = useState(0);
     const addToCart =()=> {
+        setNumber(prev => prev + 1)
         let product ={};
 
         if(!selectValue && isClothes) {
@@ -61,6 +60,7 @@ const Product =()=> {
                 size: selectValue.value,
                 id : `${currentProduct.id}${selectValue.value}`,
                 key: `${currentProduct.id}${selectValue.value}`,
+                number: `${number}`,
             };
         } else if(!isClothes) {
             product = {
@@ -196,10 +196,6 @@ const Product =()=> {
                 <p className={classes.similar__title}>Similar products</p>
                 { fetchProducts && <ProductsSlider category={category} observer={false}/> }
             </div>   
-            <button onClick={()=>{
-                // console.log('cart', cart)
-                console.log('products in cart', products)
-        }}>NOWYYYYYYYYYYYYYY</button>
         </div>
     )
 }

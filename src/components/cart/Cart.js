@@ -6,11 +6,13 @@ const Cart =()=> {
     const productsInCart = useSelector(state => state.cart.productsInCart);
 
     const noDuplicates =()=> {
+        console.log('NO DUPLICATES');
+        console.log('------=========produts in cart', productsInCart);
         const productsToRender = [];
         const updateProductsInCart = [...productsInCart]
 
         updateProductsInCart.forEach((product) => {
-            const duplicates = updateProductsInCart.filter(item => item.key === product.key);
+            const duplicates = updateProductsInCart.filter(item => item.id === product.id);
             
             const productsAmount = duplicates.length;
             const removeDuplicates = duplicates.slice(1).forEach(item => {
@@ -18,7 +20,7 @@ const Cart =()=> {
                 updateProductsInCart.splice(index,1);
             })
 
-            productsToRender.push(< CartItem product={product} amount={productsAmount} key={product.key} />);
+            productsToRender.push(< CartItem product={product} amount={productsAmount} key={`${product.key}${productsAmount}`} />);
 
         })
         return productsToRender;
