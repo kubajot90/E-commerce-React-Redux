@@ -50,9 +50,25 @@
     font-size: 1.6rem;
 }
 
+.iconBadge {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    width: 1.4vw;
+    height: 1.4vw;
+    background-color: var(--yellowColor);
+    border-radius: 50%;
+    font-size: .9vw;
+    font-weight: 700;
+}
+
 .hashLink {
-    text-decoration: none;
     all: unset;
+    position: relative;
+    text-decoration: none;
     margin-left: 35px;
     cursor: pointer;
 }

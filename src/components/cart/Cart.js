@@ -6,8 +6,6 @@ const Cart =()=> {
     const productsInCart = useSelector(state => state.cart.productsInCart);
 
     const noDuplicates =()=> {
-        console.log('NO DUPLICATES');
-        console.log('------=========produts in cart', productsInCart);
         const productsToRender = [];
         const updateProductsInCart = [...productsInCart]
 

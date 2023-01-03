@@ -12,6 +12,7 @@ const HeaderMain =()=> {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const activeCategoryHash = useSelector(state => state.category.activeHash);
+    const productsAmount = useSelector(state => state.cart.productsInCart.length);
 
     const categories = [
         {
@@ -60,6 +61,7 @@ return(
             </HashLink>
             <HashLink to={`/cart`} className={classes.hashLink}>
                 <BsHandbag className={classes.icon}/>
+                <div className={classes.iconBadge}>{productsAmount}</div>
             </HashLink>
         </div>
     </div>

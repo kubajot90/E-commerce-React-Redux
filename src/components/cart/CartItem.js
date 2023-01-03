@@ -12,8 +12,6 @@ const CartItem =(props)=> {
     const [productAmount, setProductAmount] = useState(cart.productsAmount[id]);
 
     const addToCart =()=> {
-        // dispatch(cartActions.addToCart(props.product));
-        
         const amount = { [id] : productAmount + 1 };
         dispatch(cartActions.setProductsAmount(amount));
         
@@ -22,14 +20,12 @@ const CartItem =(props)=> {
     }
     
     const removeFromCart =()=> {
-        console.log('rem from cart');
         dispatch(cartActions.removeFromCart(props.product));
-        
+
         const amount = { [id] : productAmount - 1 };
-        console.log('amount: ', amount);
+
         dispatch(cartActions.setProductsAmount(amount));
         setProductAmount(prev => prev - 1 );
-       
     }
 
     return(

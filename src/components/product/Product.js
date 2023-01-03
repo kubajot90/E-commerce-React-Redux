@@ -47,9 +47,7 @@ const Product =()=> {
         calculateDiscount();
         },[]);
     
-        const [number, setNumber] = useState(0);
     const addToCart =()=> {
-        setNumber(prev => prev + 1)
         let product ={};
 
         if(!selectValue && isClothes) {
@@ -60,7 +58,6 @@ const Product =()=> {
                 size: selectValue.value,
                 id : `${currentProduct.id}${selectValue.value}`,
                 key: `${currentProduct.id}${selectValue.value}`,
-                number: `${number}`,
             };
         } else if(!isClothes) {
             product = {
