@@ -33,6 +33,8 @@ const Product =()=> {
     const {image, title, price, description, category, id} = location.state;
     const categoryUrl = category.replace(/\s/g,'_');
 
+    const [isFavorites, setIsFavorites] = useState(false);
+
     const isClothes = category === "women's clothing" ||
     category === "men's clothing";
     
@@ -65,7 +67,16 @@ const Product =()=> {
                 key: id
             };
         }
-        dispatch(cartActions.addToCart(product));
+        selectValue && dispatch(cartActions.addToCart(product));
+    }
+
+    const toggleFavorites = () => {
+        console.log('isFavorites', isFavorites);
+        !isFavorites 
+        ? dispatch(cartActions.addToFavorites(currentProduct))
+        : dispatch(cartActions.removerFromFavorites(currentProduct))
+
+        setIsFavorites(prev => prev = !prev)
     }
 
     const checkProductsAmount = () => {
@@ -181,8 +192,8 @@ const Product =()=> {
                                 {buttonText}
                                 <BsHandbag className={classes.product__buttonBag}/>
                             </button>
-                            <button className={classes.product__buttonFavorite}>
-                                <BsHeart className={classes.product__buttonHearth}/>
+                            <button onClick={toggleFavorites} className={`${classes.product__buttonFavorite} ${isFavorites ? classes.product__buttonFavorite_active : ''}`}>
+                                <BsHeart className={`${classes.product__buttonHearth} ${isFavorites ? classes.product__buttonHearth_active : ''}`}/>
                             </button>
                         </div>
                         <InformationBox/>

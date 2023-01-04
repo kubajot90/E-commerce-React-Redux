@@ -182,6 +182,15 @@
     width: 44px;
     border: 1px solid black;
     background-color: #fff;
+    transition: .4s;
+}
+
+.product__buttonFavorite:hover {
+    background-color: black;
+}
+
+.product__buttonFavorite_active {
+    background-color: black;
 }
 
 .product__buttonBag {
@@ -191,6 +200,15 @@
 
 .product__buttonHearth {
     font-size: 1.5rem;
+    transition: .4s;
+}
+
+.product__buttonHearth_active {
+    color:white
+}
+
+.product__buttonFavorite:hover .product__buttonHearth {
+    color:white
 }
 
 .product__similar {
