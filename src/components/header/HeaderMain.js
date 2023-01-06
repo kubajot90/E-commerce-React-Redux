@@ -61,7 +61,7 @@ return(
             </HashLink>
             <HashLink to={`/cart`} className={classes.hashLink}>
                 <BsHandbag className={classes.icon}/>
-                <div className={classes.iconBadge}>{productsAmount}</div>
+                {productsAmount > 0 && <div className={classes.iconBadge}>{productsAmount}</div>}
             </HashLink>
         </div>
     </div>

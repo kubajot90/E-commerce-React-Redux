@@ -26,14 +26,15 @@ const Product =()=> {
     const fetchProducts = useSelector(state => state.products.data);
     const products = useSelector(state => state.cart.productsInCart);
     const dispatch = useDispatch();
-  
+    
     const location = useLocation();
     const currentProduct = location.state;
-
+    
     const {image, title, price, description, category, id} = location.state;
     const categoryUrl = category.replace(/\s/g,'_');
-
-    const [isFavorites, setIsFavorites] = useState(false);
+    
+    const favoritesProducts = useSelector(state => state.cart.favoritesProducts);
+    const [isFavorites, setIsFavorites] = useState(null);
 
     const isClothes = category === "women's clothing" ||
     category === "men's clothing";
@@ -47,6 +48,7 @@ const Product =()=> {
         window.scrollTo(0,0);
         dispatch(fetchProductsData());
         calculateDiscount();
+        checkIsFavorites(currentProduct);
         },[]);
     
     const addToCart =()=> {
@@ -71,12 +73,18 @@ const Product =()=> {
     }
 
     const toggleFavorites = () => {
-        console.log('isFavorites', isFavorites);
+        console.log('isfavorites: ', isFavorites);
         !isFavorites 
         ? dispatch(cartActions.addToFavorites(currentProduct))
-        : dispatch(cartActions.removerFromFavorites(currentProduct))
+        : dispatch(cartActions.removeFromFavorites(currentProduct))
 
         setIsFavorites(prev => prev = !prev)
+    }
+
+    const checkIsFavorites = (product) => {
+        const isAdd = Boolean(favoritesProducts.filter(item => item.id === product.id).length);
+
+        setIsFavorites(isAdd);
     }
 
     const checkProductsAmount = () => {
@@ -203,7 +211,7 @@ const Product =()=> {
             <div className={classes.product__similar}>
                 <p className={classes.similar__title}>Similar products</p>
                 { fetchProducts && <ProductsSlider category={category} observer={false}/> }
-            </div>   
+            </div> 
         </div>
     )
 }

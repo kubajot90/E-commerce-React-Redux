@@ -11,16 +11,16 @@ export const cartSlice = createSlice({
         },
 
         addToFavorites(state, action) {
-            state.favoritesProducts = {...state.favoritesProducts, ...[action.payload]};
-            console.log('favorites ', current(state).favoritesProducts);
+            state.favoritesProducts = [...state.favoritesProducts, action.payload];
         },
 
-        removerFromFavorites(state, action) {
-            const favoritesCopy = [...state.favoritesProducts];
-            state.favoritesProducts = favoritesCopy.filter(product => product !== action.payload)
-            
-            console.log('favorites ', current(state).favoritesProducts);
+        removeFromFavorites(state, action) {
+            state.favoritesProducts = current(state).favoritesProducts.filter(product => product.id !== action.payload.id);
         },
+
+        // checkIsFavorites(state, action) {
+       
+        // },
 
         // removeFromCart(state, action) {
             // state.productsInCart.filter(action.payload)
