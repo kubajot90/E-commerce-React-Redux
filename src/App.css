@@ -1,11 +1,6 @@
 :root {
-    --mainPadding: 3.9vw;
-    --mainMargin: 5.6vw;
-    --yellowColor: #ffcd00;
-    --greyColor: rgb(239, 239, 239)
-}
-
-.App {
-
-
+  --mainPadding: 3.9vw;
+  --mainMargin: 5.6vw;
+  --yellowColor: #ffcd00;
+  --greyColor: rgb(239, 239, 239);
 }

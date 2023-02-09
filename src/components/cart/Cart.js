@@ -4,6 +4,7 @@ import classes from "./Cart.module.css";
 
 const Cart = () => {
   const productsInCart = useSelector((state) => state.cart.productsInCart);
+  const productsInCartAmount = productsInCart.length;
 
   const noDuplicates = () => {
     const productsToRender = [];
@@ -15,6 +16,7 @@ const Cart = () => {
       );
 
       const productsAmount = duplicates.length;
+
       const removeDuplicates = duplicates.slice(1).forEach((item) => {
         const index = updateProductsInCart.indexOf(item);
         updateProductsInCart.splice(index, 1);
@@ -36,7 +38,7 @@ const Cart = () => {
       <div className={classes.cart__main}>
         <div className={classes.cart__header}>
           <h1 className={classes.header__title}>Cart</h1>
-          <span className={classes.header__amount}>2</span>
+          <span className={classes.header__amount}>{productsInCartAmount}</span>
         </div>
         <ul className={classes.cart__list}>
           {noDuplicates().map((product) => product)}

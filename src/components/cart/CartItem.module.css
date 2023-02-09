@@ -1,5 +1,7 @@
 .cartItem {
   display: flex;
+  padding: 30px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 0.9rem;
 }
 
@@ -30,6 +32,7 @@
 }
 
 .header__price {
+  width: 40px;
   font-size: 1rem;
   font-weight: 700;
   margin-left: 0.5vw;
@@ -42,12 +45,14 @@
 }
 
 .attribute__p {
-  /* font-size: 0.9rem; */
   opacity: 0.5;
 }
 
+.attribute__counter {
+  min-height: 20px;
+}
+
 .attribute__value {
-  /* font-size: 0.9rem; */
   font-weight: 700;
 }
 

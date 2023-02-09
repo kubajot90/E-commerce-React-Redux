@@ -10,6 +10,7 @@ const CartItem = (props) => {
   const { title, image, price, size, id } = props.product;
   const cart = useSelector((state) => state.cart);
   const [productAmount, setProductAmount] = useState(cart.productsAmount[id]);
+  const totalPrice = (price * productAmount).toFixed(2);
 
   const addToCart = () => {
     const amount = { [id]: productAmount + 1 };
@@ -36,7 +37,7 @@ const CartItem = (props) => {
       <div className={classes.cartItem__detailsContainer}>
         <div className={classes.cartItem__header}>
           <p className={classes.header__title}>{title}</p>
-          <span className={classes.header__price}>{`${price} PLN`}</span>
+          <span className={classes.header__price}>{`${totalPrice} $`}</span>
         </div>
 
         <div className={classes.cartItem__attribute}>
