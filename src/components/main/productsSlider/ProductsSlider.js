@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { categoryActions } from "../../store/categorySlice";
+import { categoryActions } from "../../../store/categorySlice";
 import ProductCard from "./ProductCard";
 import classes from "./ProductsSlider.module.css";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";

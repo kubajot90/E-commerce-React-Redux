@@ -21,15 +21,10 @@
   font-size: 1rem;
 }
 
-.header__title {
-  /* font-size: 1.6rem; */
-}
-
 .header__amount {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 0 6px; */
   width: 2.2vw;
   height: 2.2vw;
   margin-left: 1vw;

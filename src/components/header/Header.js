@@ -1,19 +1,19 @@
-import HeaderTop from './HeaderTop';
-import HeaderMain from './HeaderMain';
-import HeaderCategories from './HeaderCategories';
-import HeaderSearch from './HeaderSearch';
-import classes from './Header.module.css';
+import HeaderTop from "./HeaderTop";
+import HeaderMain from "./HeaderMain";
+import HeaderCategories from "./headerCategories/HeaderCategories";
+import HeaderSearch from "./search/HeaderSearch";
+import classes from "./Header.module.css";
 
-const Header =()=>{
-return(
+const Header = () => {
+  return (
     <>
-        <HeaderTop/>
-    <div className={classes.header}>
-        <HeaderMain/>
-        <HeaderCategories/>
-        <HeaderSearch/>
-    </div>
+      <HeaderTop />
+      <div className={classes.header}>
+        <HeaderMain />
+        <HeaderCategories />
+        <HeaderSearch />
+      </div>
     </>
-)
-}
-export default Header
+  );
+};
+export default Header;

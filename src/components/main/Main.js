@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import HeroVideoBaner from "./HeroVideoBaner";
-import ProductsSlider from "./ProductsSlider";
+import HeroVideoBaner from "./baners/HeroVideoBaner";
+import ProductsSlider from "./productsSlider/ProductsSlider";
 import fetchProductsData from "../../store/productsSlice";
-import InfoCards from "./InfoCards";
+import InfoCards from "./infoCards/InfoCards";
 import Baner1 from "./baners/Baner1";
 import Baner2 from "./baners/Baner2";
 

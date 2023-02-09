@@ -50,6 +50,7 @@
 
 .attribute__counter {
   min-height: 20px;
+  min-width: 75px;
 }
 
 .attribute__value {

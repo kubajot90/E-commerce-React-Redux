@@ -1,0 +1,54 @@
+.product__buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product__buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  cursor: pointer;
+}
+
+.product__buttonAdd {
+  flex-grow: 1;
+  margin-right: 4%;
+  border-radius: 0;
+  border: none;
+  background-color: black;
+  color: white;
+}
+
+.product__buttonFavorite {
+  width: 44px;
+  border: 1px solid black;
+  background-color: #fff;
+  transition: 0.4s;
+}
+
+.product__buttonFavorite:hover {
+  background-color: black;
+}
+
+.product__buttonFavorite_active {
+  background-color: black;
+}
+
+.product__buttonBag {
+  font-size: 1.5rem;
+  margin-left: 15px;
+}
+
+.product__buttonHearth {
+  font-size: 1.5rem;
+  transition: 0.4s;
+}
+
+.product__buttonHearth_active {
+  color: white;
+}
+
+.product__buttonFavorite:hover .product__buttonHearth {
+  color: white;
+}

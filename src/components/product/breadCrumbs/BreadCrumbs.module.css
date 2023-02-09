@@ -1,0 +1,30 @@
+.breadCrumbs__list {
+  display: flex;
+  margin-bottom: 20px;
+  padding: 0 var(--mainPadding);
+  font-size: 0.7rem;
+  list-style-type: none;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.breadCrumbs__link {
+  all: unset;
+}
+
+.breadCrumbs__arrow {
+  margin: 0 10px;
+}
+
+.breadCrumbs__span {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.breadCrumbs__span:hover {
+  color: rgba(0, 0, 0);
+  text-decoration: underline;
+}
+
+.breadCrumbs__span.active {
+  color: rgba(0, 0, 0);
+}

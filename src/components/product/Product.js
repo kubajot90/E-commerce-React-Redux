@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, Link } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
-import Accordion from "./Accordion";
-import ProductsSlider from "../main/ProductsSlider";
-import InformationBox from "./InformationBox";
+import { useLocation } from "react-router-dom";
+import Accordion from "./accordion/Accordion";
+import InformationBox from "./informationBox/InformationBox";
+import BreadCrumbs from "./breadCrumbs/BreadCrumbs";
+import SimilarProducts from "./SimilarProducts";
 import Select from "react-select";
-import { BsHeart, BsHandbag } from "react-icons/bs";
 import classes from "./Product.module.css";
 import fetchProductsData from "../../store/productsSlice";
 import { cartActions } from "../../store/cartSlice";
+import ProductButtons from "./ProductButtons";
 
 const options = [
   { value: "", label: "Chose your size" },
@@ -23,7 +23,7 @@ const Product = () => {
   const [selectValue, setSelectValue] = useState("");
   const [productsAmount, setProductsAmount] = useState(null);
   const sizeSelectRef = useRef("");
-  const fetchProducts = useSelector((state) => state.products.data);
+
   const products = useSelector((state) => state.cart.productsInCart);
   const dispatch = useDispatch();
 
@@ -31,7 +31,6 @@ const Product = () => {
   const currentProduct = location.state;
 
   const { image, title, price, description, category, id } = location.state;
-  const categoryUrl = category.replace(/\s/g, "_");
 
   const favoritesProducts = useSelector(
     (state) => state.cart.favoritesProducts
@@ -57,24 +56,26 @@ const Product = () => {
 
     if (!selectValue && isClothes) {
       sizeSelectRef.current.focus();
-    } else if (isClothes) {
+      return;
+    }
+    if (isClothes && selectValue) {
       product = {
         ...currentProduct,
         size: selectValue.value,
         id: `${currentProduct.id}${selectValue.value}`,
         key: `${currentProduct.id}${selectValue.value}`,
       };
-    } else if (!isClothes) {
+    }
+    if (!isClothes) {
       product = {
         ...currentProduct,
         key: id,
       };
     }
-    selectValue && dispatch(cartActions.addToCart(product));
+    dispatch(cartActions.addToCart(product));
   };
 
   const toggleFavorites = () => {
-    console.log("isfavorites: ", isFavorites);
     !isFavorites
       ? dispatch(cartActions.addToFavorites(currentProduct))
       : dispatch(cartActions.removeFromFavorites(currentProduct));
@@ -131,28 +132,7 @@ const Product = () => {
 
   return (
     <div className={classes.product}>
-      <ul className={classes.breadCrumbs__list}>
-        <li className={classes.breadCrumbs__item}>
-          <Link to={"/"} className={classes.breadCrumbs__link}>
-            <span className={classes.breadCrumbs__span}>e-Shop</span>
-          </Link>
-          <span className={classes.breadCrumbs__arrow}>{`>`}</span>
-        </li>
-        <li>
-          <HashLink
-            to={`/#${categoryUrl}`}
-            className={classes.breadCrumbs__link}
-          >
-            <span className={classes.breadCrumbs__span}>{category}</span>
-          </HashLink>
-          <span className={classes.breadCrumbs__arrow}>{`>`}</span>
-        </li>
-        <li>
-          <span className={`${classes.breadCrumbs__span} ${classes.active}`}>
-            {title}
-          </span>
-        </li>
-      </ul>
+      <BreadCrumbs />
       <div className={classes.product__main}>
         <div className={classes.product__imageBox}>
           <img
@@ -183,7 +163,7 @@ const Product = () => {
           <div className={classes.product__priceBox}>
             {discount > 0 && (
               <div className={classes.product__priceSales}>
-                {`${discountPrice} PLN`}
+                {`${discountPrice} $`}
               </div>
             )}
             <div
@@ -191,7 +171,7 @@ const Product = () => {
                 discount < 1 ? classes.product__priceActive : ""
               }`}
             >
-              {`${price} PLN`}
+              {`${price} $`}
             </div>
           </div>
           {isClothes && (
@@ -204,34 +184,17 @@ const Product = () => {
               className={classes.product__select}
             />
           )}
-          <div className={classes.product__buttons}>
-            <button onClick={addToCart} className={classes.product__buttonAdd}>
-              {buttonText}
-              <BsHandbag className={classes.product__buttonBag} />
-            </button>
-            <button
-              onClick={toggleFavorites}
-              className={`${classes.product__buttonFavorite} ${
-                isFavorites ? classes.product__buttonFavorite_active : ""
-              }`}
-            >
-              <BsHeart
-                className={`${classes.product__buttonHearth} ${
-                  isFavorites ? classes.product__buttonHearth_active : ""
-                }`}
-              />
-            </button>
-          </div>
+          <ProductButtons
+            addToCart={addToCart}
+            buttonText={buttonText}
+            toggleFavorites={toggleFavorites}
+            isFavorites={isFavorites}
+          />
           <InformationBox />
           <Accordion description={description} />
         </div>
       </div>
-      <div className={classes.product__similar}>
-        <p className={classes.similar__title}>Similar products</p>
-        {fetchProducts && (
-          <ProductsSlider category={category} observer={false} />
-        )}
-      </div>
+      <SimilarProducts />
     </div>
   );
 };
