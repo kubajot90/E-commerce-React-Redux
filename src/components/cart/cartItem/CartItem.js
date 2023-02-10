@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { cartActions } from "../../store/cartSlice";
+import { cartActions } from "../../../store/cartSlice";
 import { BsHeart } from "react-icons/bs";
 import { GrClose } from "react-icons/gr";
 import classes from "./CartItem.module.css";
@@ -44,10 +44,12 @@ const CartItem = (props) => {
           <p className={classes.attribute__p}>Price</p>
           <span className={classes.attribute__value}>{price}</span>
         </div>
-        <div className={classes.cartItem__attribute}>
-          <p className={classes.attribute__p}>Size</p>
-          <span className={classes.attribute__value}>{size}</span>
-        </div>
+        {size && (
+          <div className={classes.cartItem__attribute}>
+            <p className={classes.attribute__p}>Size</p>
+            <span className={classes.attribute__value}>{size}</span>
+          </div>
+        )}
         <div className={classes.cartItem__attribute}>
           <p className={classes.attribute__p}>Amount</p>
           <div className={classes.attribute__counter}>

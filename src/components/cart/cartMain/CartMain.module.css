@@ -1,0 +1,25 @@
+.cart__main {
+  flex-basis: 65%;
+  padding: 25px 30px;
+  margin-right: 36px;
+  background-color: #f4f4f4;
+}
+
+.cart__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1vw;
+  font-size: 1rem;
+}
+
+.header__amount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.2vw;
+  height: 2.2vw;
+  margin-left: 1vw;
+  font-size: 1.2rem;
+  border: 3px solid var(--yellowColor);
+  border-radius: 50%;
+}
