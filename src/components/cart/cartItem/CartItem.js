@@ -10,7 +10,7 @@ const CartItem = (props) => {
   const { title, image, price, size, id } = props.product;
   const cart = useSelector((state) => state.cart);
   const [productAmount, setProductAmount] = useState(cart.productsAmount[id]);
-  const totalPrice = (price * productAmount).toFixed(2);
+  const totalPrice = parseFloat((price * productAmount).toFixed(2));
 
   const addToCart = () => {
     const amount = { [id]: productAmount + 1 };

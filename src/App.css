@@ -4,3 +4,8 @@
   --yellowColor: #ffcd00;
   --greyColor: rgb(239, 239, 239);
 }
+
+.app {
+  margin: 0 auto;
+  max-width: 1700px;
+}

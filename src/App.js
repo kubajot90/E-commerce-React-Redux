@@ -9,7 +9,7 @@ import "./App.css";
 
 function App() {
   return (
-    <>
+    <div className="app">
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
@@ -18,7 +18,7 @@ function App() {
       </Routes>
       <Footer />
       <TopScrollButton />
-    </>
+    </div>
   );
 }
 
