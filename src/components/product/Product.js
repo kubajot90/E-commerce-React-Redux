@@ -5,11 +5,11 @@ import Accordion from "./accordion/Accordion";
 import InformationBox from "./informationBox/InformationBox";
 import BreadCrumbs from "./breadCrumbs/BreadCrumbs";
 import SimilarProducts from "./SimilarProducts";
+import ProductButtons from "./ProductButtons";
 import Select from "react-select";
 import classes from "./Product.module.css";
 import fetchProductsData from "../../store/productsSlice";
 import { cartActions } from "../../store/cartSlice";
-import ProductButtons from "./ProductButtons";
 
 const options = [
   { value: "", label: "Chose your size" },
