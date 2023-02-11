@@ -1,0 +1,40 @@
+.summary__wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+  font-size: 0.9rem;
+}
+
+.summary__h2 {
+  padding-bottom: 15px;
+  margin: 25px 0 15px 0;
+  border-bottom: 1px solid rgba(53, 53, 53, 0.1);
+}
+
+.summary__title {
+  /* font-size: 0.8rem; */
+  font-weight: 400;
+}
+
+.summary__amount {
+}
+
+.summary__titleTotal {
+  margin-top: 15px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.summary__amountTotal {
+  margin-top: 15px;
+  font-weight: 700;
+}
+
+.summary__button {
+  margin: 15px 0 30px;
+  height: 48px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  border: none;
+}

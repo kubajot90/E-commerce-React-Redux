@@ -6,6 +6,7 @@ export const cartSlice = createSlice({
     productsInCart: [],
     productsAmount: {},
     favoritesProducts: [],
+    isWrapGift: false,
   },
   reducers: {
     addToCart(state, action) {
@@ -30,6 +31,11 @@ export const cartSlice = createSlice({
 
     setProductsAmount(state, action) {
       state.productsAmount = { ...state.productsAmount, ...action.payload };
+    },
+
+    toggleIsWrapGift(state) {
+      state.isWrapGift = !state.isWrapGift;
+      console.log("dziala");
     },
   },
 });

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { cartActions } from "../../../../../store/cartSlice";
 import { BsGift } from "react-icons/bs";
 import { TbDiscount } from "react-icons/tb";
 import { IoIosArrowDown } from "react-icons/io";
@@ -6,13 +8,15 @@ import { MdCardGiftcard } from "react-icons/md";
 import classes from "./CartDetailsCards.module.css";
 
 function CartDetailsCards() {
-  const [isCheckBoxMark, setIsCheckBoxMark] = useState(false);
+  const isCheckBoxMark = useSelector((state) => state.cart.isWrapGift);
+  const dispatch = useDispatch();
+
   const [openForm, setOpenForm] = useState(false);
 
   const packingCost = 19.99;
 
   const toggleCheckbox = () => {
-    setIsCheckBoxMark((prev) => (prev = !prev));
+    dispatch(cartActions.toggleIsWrapGift());
   };
 
   const showForm = () => {
