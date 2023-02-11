@@ -1,0 +1,96 @@
+.cartDetailsCards {
+  width: 100%;
+}
+
+.cartCard {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 64px;
+  padding: 0 40px;
+  margin-bottom: 10px;
+  background-color: rgb(244, 244, 244);
+}
+
+.cartCard.cartCard:nth-child(3) {
+  background-color: transparent;
+}
+
+.cartCard__wrapper {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  width: 100%;
+}
+
+.cartCard__icon {
+  margin-right: 15px;
+  font-size: 1.3rem;
+}
+
+.cartCard__arrowButton {
+  margin-left: auto;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.arrowButton_active {
+  transform: rotate(180deg);
+}
+
+.cartCard__text {
+  font-size: 0.8rem;
+}
+
+.cartCard__cost {
+  margin-left: auto;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.cartCard__checkbox {
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.cartCard__checkboxFill {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background-color: black;
+}
+
+.cartCard__form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 64px;
+}
+
+.cartCard__input {
+  padding: 20px;
+  height: 48px;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.cartCard__button {
+  margin-left: 10px;
+  height: 48px;
+  width: 70px;
+  border: 1px solid black;
+  background-color: transparent;
+  cursor: pointer;
+}
