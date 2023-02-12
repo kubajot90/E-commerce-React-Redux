@@ -10,6 +10,7 @@ import Select from "react-select";
 import classes from "./Product.module.css";
 import fetchProductsData from "../../store/productsSlice";
 import { cartActions } from "../../store/cartSlice";
+import useFavorites from "../../hooks/useFavorites";
 
 const options = [
   { value: "", label: "Chose your size" },
@@ -35,7 +36,8 @@ const Product = () => {
   const favoritesProducts = useSelector(
     (state) => state.cart.favoritesProducts
   );
-  const [isFavorites, setIsFavorites] = useState(null);
+  const favorites = useFavorites(currentProduct);
+  // const [isFavorites, setIsFavorites] = useState(null);
 
   const isClothes =
     category === "women's clothing" || category === "men's clothing";
@@ -48,7 +50,7 @@ const Product = () => {
     window.scrollTo(0, 0);
     dispatch(fetchProductsData());
     calculateDiscount();
-    checkIsFavorites(currentProduct);
+    favorites.checkIsFavorites(currentProduct);
   }, []);
 
   const addToCart = () => {
@@ -75,21 +77,21 @@ const Product = () => {
     dispatch(cartActions.addToCart(product));
   };
 
-  const toggleFavorites = () => {
-    !isFavorites
-      ? dispatch(cartActions.addToFavorites(currentProduct))
-      : dispatch(cartActions.removeFromFavorites(currentProduct));
+  // const toggleFavorites = () => {
+  //   !isFavorites
+  //     ? dispatch(cartActions.addToFavorites(currentProduct))
+  //     : dispatch(cartActions.removeFromFavorites(currentProduct));
 
-    setIsFavorites((prev) => (prev = !prev));
-  };
+  //   setIsFavorites((prev) => (prev = !prev));
+  // };
 
-  const checkIsFavorites = (product) => {
-    const isAdd = Boolean(
-      favoritesProducts.filter((item) => item.id === product.id).length
-    );
+  // const checkIsFavorites = (product) => {
+  //   const isAdd = Boolean(
+  //     favoritesProducts.filter((item) => item.id === product.id).length
+  //   );
 
-    setIsFavorites(isAdd);
-  };
+  //   setIsFavorites(isAdd);
+  // };
 
   const checkProductsAmount = () => {
     const size = isClothes ? selectValue.value : null;
@@ -187,8 +189,8 @@ const Product = () => {
           <ProductButtons
             addToCart={addToCart}
             buttonText={buttonText}
-            toggleFavorites={toggleFavorites}
-            isFavorites={isFavorites}
+            toggleFavorites={favorites.toggleFavorites}
+            isFavorites={favorites.isFavorites}
           />
           <InformationBox />
           <Accordion description={description} />

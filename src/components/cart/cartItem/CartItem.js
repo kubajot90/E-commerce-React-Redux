@@ -35,6 +35,13 @@ const CartItem = (props) => {
     setProductAmount(0);
   };
 
+  const toggleFavorites = () => {
+    // !isFavorites
+    //   ? dispatch(cartActions.addToFavorites(currentProduct))
+    //   : dispatch(cartActions.removeFromFavorites(currentProduct));
+    // setIsFavorites((prev) => (prev = !prev));
+  };
+
   return (
     <div className={classes.cartItem}>
       <div className={classes.cartItem__imageContainer}>
@@ -76,7 +83,7 @@ const CartItem = (props) => {
             <GrClose className={classes.options__icon} />
             Delete
           </button>
-          <button className={classes.options__button}>
+          <button onClick={toggleFavorites} className={classes.options__button}>
             <BsHeart className={classes.options__icon} />
             Add to favorites
           </button>
