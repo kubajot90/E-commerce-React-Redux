@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cartSlice";
 import { BsHeart } from "react-icons/bs";
 import { GrClose } from "react-icons/gr";
+import useFavorites from "../../../hooks/useFavorites";
 import classes from "./CartItem.module.css";
 
 const CartItem = (props) => {
@@ -10,6 +11,8 @@ const CartItem = (props) => {
   const { title, image, price, size, id } = props.product;
   const cart = useSelector((state) => state.cart);
   const [productAmount, setProductAmount] = useState(cart.productsAmount[id]);
+  const favorites = useFavorites(props.product);
+
   const totalPrice = parseFloat((price * productAmount).toFixed(2));
 
   const addToCart = () => {
@@ -35,12 +38,12 @@ const CartItem = (props) => {
     setProductAmount(0);
   };
 
-  const toggleFavorites = () => {
-    // !isFavorites
-    //   ? dispatch(cartActions.addToFavorites(currentProduct))
-    //   : dispatch(cartActions.removeFromFavorites(currentProduct));
-    // setIsFavorites((prev) => (prev = !prev));
-  };
+  // const toggleFavorites = () => {
+  // !isFavorites
+  //   ? dispatch(cartActions.addToFavorites(currentProduct))
+  //   : dispatch(cartActions.removeFromFavorites(currentProduct));
+  // setIsFavorites((prev) => (prev = !prev));
+  // };
 
   return (
     <div className={classes.cartItem}>
@@ -83,8 +86,17 @@ const CartItem = (props) => {
             <GrClose className={classes.options__icon} />
             Delete
           </button>
-          <button onClick={toggleFavorites} className={classes.options__button}>
-            <BsHeart className={classes.options__icon} />
+          <button
+            onClick={favorites.toggleFavorites}
+            className={`${classes.options__button} ${
+              favorites.isFavorites ? classes.options__buttonActive : ""
+            }`}
+          >
+            <BsHeart
+              className={`${classes.options__icon} ${
+                favorites.isFavorites ? classes.options__iconActive : ""
+              }`}
+            />
             Add to favorites
           </button>
         </div>

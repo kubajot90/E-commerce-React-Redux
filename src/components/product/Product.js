@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import useFavorites from "../../hooks/useFavorites";
+import Select from "react-select";
 import Accordion from "./accordion/Accordion";
 import InformationBox from "./informationBox/InformationBox";
 import BreadCrumbs from "./breadCrumbs/BreadCrumbs";
 import SimilarProducts from "./SimilarProducts";
 import ProductButtons from "./ProductButtons";
-import Select from "react-select";
-import classes from "./Product.module.css";
 import fetchProductsData from "../../store/productsSlice";
 import { cartActions } from "../../store/cartSlice";
-import useFavorites from "../../hooks/useFavorites";
+import classes from "./Product.module.css";
 
 const options = [
   { value: "", label: "Chose your size" },
@@ -33,9 +33,9 @@ const Product = () => {
 
   const { image, title, price, description, category, id } = location.state;
 
-  const favoritesProducts = useSelector(
-    (state) => state.cart.favoritesProducts
-  );
+  // const favoritesProducts = useSelector(
+  //   (state) => state.cart.favoritesProducts
+  // );
   const favorites = useFavorites(currentProduct);
   // const [isFavorites, setIsFavorites] = useState(null);
 

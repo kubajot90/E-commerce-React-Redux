@@ -1,0 +1,43 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30vw;
+  background-color: #f4f4f4;
+}
+
+.modal__contentWrapper {
+  text-align: center;
+}
+
+.title__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__h2 {
+  margin: 6vh 0 5vh 0;
+}
+
+.modal__button {
+  width: 80%;
+  height: 40px;
+  border: solid 1px black;
+  background-color: transparent;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.modal__button:hover {
+  background-color: black;
+  color: white;
+}
+
+.modal__Icon {
+  font-size: 1.2rem;
+  margin-right: 1vh;
+}
