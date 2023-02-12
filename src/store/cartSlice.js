@@ -28,6 +28,14 @@ export const cartSlice = createSlice({
       const item = action.payload;
       const itemIndex = current(state).productsInCart.indexOf(item);
       state.productsInCart.splice(itemIndex, 1);
+      console.log("state.productsInCart", current(state).productsInCart);
+    },
+
+    removeAll(state, action) {
+      const id = action.payload;
+      state.productsInCart = state.productsInCart.filter(
+        (product) => product.id !== id
+      );
     },
 
     setProductsAmount(state, action) {
@@ -36,10 +44,12 @@ export const cartSlice = createSlice({
 
     updateCartValue(state) {
       state.cartValue = 0;
+      if (state.isWrapGift) {
+        state.cartValue = state.cartValue + 19.99;
+      }
       state.productsInCart.forEach(
         (product) => (state.cartValue = state.cartValue + product.price)
       );
-      console.log("value :", state.cartValue);
     },
 
     toggleIsWrapGift(state) {

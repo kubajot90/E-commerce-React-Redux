@@ -22,11 +22,17 @@ const CartItem = (props) => {
 
   const removeFromCart = () => {
     dispatch(cartActions.removeFromCart(props.product));
-
     const amount = { [id]: productAmount - 1 };
-
+    console.log("id", id);
     dispatch(cartActions.setProductsAmount(amount));
     setProductAmount((prev) => prev - 1);
+  };
+
+  const removeAll = () => {
+    dispatch(cartActions.removeAll(id));
+    const amount = { [id]: 0 };
+    dispatch(cartActions.setProductsAmount(amount));
+    setProductAmount(0);
   };
 
   return (
@@ -66,7 +72,7 @@ const CartItem = (props) => {
           </div>
         </div>
         <div className={classes.cartItem__options}>
-          <button className={classes.options__button}>
+          <button onClick={removeAll} className={classes.options__button}>
             <GrClose className={classes.options__icon} />
             Delete
           </button>
