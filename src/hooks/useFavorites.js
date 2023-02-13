@@ -5,8 +5,8 @@ import { favoritesActions } from "../store/favoritesSlice";
 const useFavorites = (currentProduct) => {
   const [isFavorites, setIsFavorites] = useState(false);
   const dispatch = useDispatch();
-  const favoritesProductsId = useSelector(
-    (state) => state.favorites.favoritesProductsId
+  const favoritesProducts = useSelector(
+    (state) => state.favorites.favoritesProducts
   );
 
   const toggleFavorites = () => {
@@ -18,9 +18,9 @@ const useFavorites = (currentProduct) => {
   };
 
   const checkIsFavorites = (product) => {
-    // const productId = +product.id.toString().slice(0, 2);
     const isAdd = Boolean(
-      favoritesProductsId.filter((id) => id === product.id).length
+      favoritesProducts.filter((favProduct) => favProduct.id === product.id)
+        .length
     );
 
     setIsFavorites(isAdd);
@@ -28,7 +28,7 @@ const useFavorites = (currentProduct) => {
 
   useEffect(() => {
     checkIsFavorites(currentProduct);
-  }, [favoritesProductsId]);
+  }, [favoritesProducts]);
 
   return { toggleFavorites, checkIsFavorites, isFavorites };
 };

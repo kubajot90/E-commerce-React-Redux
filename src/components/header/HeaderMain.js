@@ -16,9 +16,7 @@ const HeaderMain = () => {
     (state) => state.cart.productsInCart.length
   );
   const favoritesAmount = useSelector(
-    (state) => state.favorites.favoritesProductsId.length
-    // const favoritesAmount = useSelector(
-    //   (state) => [...new Set(state.favorites.favoritesProductsId)].length
+    (state) => state.favorites.favoritesProducts.length
   );
 
   const categories = [

@@ -4,6 +4,7 @@ import classes from "./Modal.module.css";
 
 const Modal = ({ title, subtitle }) => {
   const navigate = useNavigate();
+  window.scrollTo(0, 0);
 
   const backHomePage = () => {
     navigate("/");
