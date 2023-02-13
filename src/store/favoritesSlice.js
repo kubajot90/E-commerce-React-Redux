@@ -13,7 +13,6 @@ export const favoritesSlice = createSlice({
       if (state.favoritesProducts.indexOf(productId) < 0) {
         state.favoritesProducts = [...state.favoritesProducts, product];
       }
-      console.log("fav prod:", current(state).favoritesProducts);
     },
 
     removeFromFavorites(state, action) {

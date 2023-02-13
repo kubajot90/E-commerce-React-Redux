@@ -89,7 +89,6 @@ const Product = () => {
 
     const amount = { [key]: isAdded.length };
     isAdded.length && dispatch(cartActions.setProductsAmount(amount));
-    console.log("product amount: ", amount);
   };
 
   const changeButtonName = () => {

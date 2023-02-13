@@ -18,7 +18,6 @@ export const cartSlice = createSlice({
       const item = action.payload;
       const itemIndex = current(state).productsInCart.indexOf(item);
       state.productsInCart.splice(itemIndex, 1);
-      console.log("state.productsInCart", current(state).productsInCart);
     },
 
     removeAll(state, action) {

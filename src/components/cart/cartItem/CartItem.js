@@ -28,9 +28,7 @@ const CartItem = (props) => {
   const removeFromCart = () => {
     dispatch(cartActions.removeFromCart(props.product));
     const amount = { [sizeId || id]: productAmount - 1 };
-    console.log("amount:", amount);
-    console.log("productAmount:", productAmount);
-    console.log("id:", id);
+
     dispatch(cartActions.setProductsAmount(amount));
     setProductAmount((prev) => prev - 1);
   };
@@ -38,7 +36,6 @@ const CartItem = (props) => {
   const removeAll = () => {
     dispatch(cartActions.removeAll(sizeId));
     const amount = { [sizeId || id]: 0 };
-    console.log("amount:", amount);
     dispatch(cartActions.setProductsAmount(amount));
     setProductAmount(0);
   };
