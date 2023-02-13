@@ -2,7 +2,7 @@
   position: relative;
   margin: 20px auto 0;
   width: 91%;
-  height: 460px;
+  max-height: 460px;
   overflow: hidden;
 }
 
