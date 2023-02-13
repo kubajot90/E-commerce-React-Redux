@@ -15,6 +15,11 @@ const HeaderMain = () => {
   const productsAmount = useSelector(
     (state) => state.cart.productsInCart.length
   );
+  const favoritesAmount = useSelector(
+    (state) => state.favorites.favoritesProductsId.length
+    // const favoritesAmount = useSelector(
+    //   (state) => [...new Set(state.favorites.favoritesProductsId)].length
+  );
 
   const categories = [
     {
@@ -70,8 +75,11 @@ const HeaderMain = () => {
         <HashLink className={classes.hashLink}>
           <BsPerson className={classes.icon} />
         </HashLink>
-        <HashLink className={classes.hashLink}>
+        <HashLink to={`/favorites`} className={classes.hashLink}>
           <BsSuitHeart className={classes.icon} />
+          {favoritesAmount > 0 && (
+            <div className={classes.iconBadge}>{favoritesAmount}</div>
+          )}
         </HashLink>
         <HashLink to={`/cart`} className={classes.hashLink}>
           <BsHandbag className={classes.icon} />

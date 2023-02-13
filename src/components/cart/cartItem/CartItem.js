@@ -8,15 +8,17 @@ import classes from "./CartItem.module.css";
 
 const CartItem = (props) => {
   const dispatch = useDispatch();
-  const { title, image, price, size, id } = props.product;
+  const { title, image, price, size, id, sizeId } = props.product;
   const cart = useSelector((state) => state.cart);
-  const [productAmount, setProductAmount] = useState(cart.productsAmount[id]);
+  const [productAmount, setProductAmount] = useState(
+    cart.productsAmount[sizeId] || cart.productsAmount[id]
+  );
   const favorites = useFavorites(props.product);
 
   const totalPrice = parseFloat((price * productAmount).toFixed(2));
 
   const addToCart = () => {
-    const amount = { [id]: productAmount + 1 };
+    const amount = { [sizeId || id]: productAmount + 1 };
     dispatch(cartActions.setProductsAmount(amount));
 
     setProductAmount((prev) => prev + 1);
@@ -25,25 +27,21 @@ const CartItem = (props) => {
 
   const removeFromCart = () => {
     dispatch(cartActions.removeFromCart(props.product));
-    const amount = { [id]: productAmount - 1 };
-    console.log("id", id);
+    const amount = { [sizeId || id]: productAmount - 1 };
+    console.log("amount:", amount);
+    console.log("productAmount:", productAmount);
+    console.log("id:", id);
     dispatch(cartActions.setProductsAmount(amount));
     setProductAmount((prev) => prev - 1);
   };
 
   const removeAll = () => {
-    dispatch(cartActions.removeAll(id));
-    const amount = { [id]: 0 };
+    dispatch(cartActions.removeAll(sizeId));
+    const amount = { [sizeId || id]: 0 };
+    console.log("amount:", amount);
     dispatch(cartActions.setProductsAmount(amount));
     setProductAmount(0);
   };
-
-  // const toggleFavorites = () => {
-  // !isFavorites
-  //   ? dispatch(cartActions.addToFavorites(currentProduct))
-  //   : dispatch(cartActions.removeFromFavorites(currentProduct));
-  // setIsFavorites((prev) => (prev = !prev));
-  // };
 
   return (
     <div className={classes.cartItem}>

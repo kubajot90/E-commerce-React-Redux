@@ -12,7 +12,7 @@ const CartMain = () => {
 
     updateProductsInCart.forEach((product) => {
       const duplicates = updateProductsInCart.filter(
-        (item) => item.id === product.id
+        (item) => item.sizeId === product.sizeId
       );
 
       const productsAmount = duplicates.length;

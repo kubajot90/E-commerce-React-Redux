@@ -33,11 +33,7 @@ const Product = () => {
 
   const { image, title, price, description, category, id } = location.state;
 
-  // const favoritesProducts = useSelector(
-  //   (state) => state.cart.favoritesProducts
-  // );
   const favorites = useFavorites(currentProduct);
-  // const [isFavorites, setIsFavorites] = useState(null);
 
   const isClothes =
     category === "women's clothing" || category === "men's clothing";
@@ -50,7 +46,6 @@ const Product = () => {
     window.scrollTo(0, 0);
     dispatch(fetchProductsData());
     calculateDiscount();
-    favorites.checkIsFavorites(currentProduct);
   }, []);
 
   const addToCart = () => {
@@ -64,7 +59,7 @@ const Product = () => {
       product = {
         ...currentProduct,
         size: selectValue.value,
-        id: `${currentProduct.id}${selectValue.value}`,
+        sizeId: `${currentProduct.id}${selectValue.value}`,
         key: `${currentProduct.id}${selectValue.value}`,
       };
     }
@@ -77,29 +72,13 @@ const Product = () => {
     dispatch(cartActions.addToCart(product));
   };
 
-  // const toggleFavorites = () => {
-  //   !isFavorites
-  //     ? dispatch(cartActions.addToFavorites(currentProduct))
-  //     : dispatch(cartActions.removeFromFavorites(currentProduct));
-
-  //   setIsFavorites((prev) => (prev = !prev));
-  // };
-
-  // const checkIsFavorites = (product) => {
-  //   const isAdd = Boolean(
-  //     favoritesProducts.filter((item) => item.id === product.id).length
-  //   );
-
-  //   setIsFavorites(isAdd);
-  // };
-
   const checkProductsAmount = () => {
     const size = isClothes ? selectValue.value : null;
 
     const isAdded = isClothes
       ? products.filter(
           (product) =>
-            `${currentProduct.id}${size}` === product.id &&
+            `${currentProduct.id}${size}` === product.sizeId &&
             size === product.size
         )
       : products.filter((product) => currentProduct.id === product.id);
@@ -110,6 +89,7 @@ const Product = () => {
 
     const amount = { [key]: isAdded.length };
     isAdded.length && dispatch(cartActions.setProductsAmount(amount));
+    console.log("product amount: ", amount);
   };
 
   const changeButtonName = () => {
