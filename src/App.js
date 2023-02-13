@@ -13,7 +13,7 @@ function App() {
     <div className="app">
       <Header />
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/E-commerce-React-Redux" element={<Main />} />
         <Route path="/:category/:product" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/favorites" element={<Favorites />} />
